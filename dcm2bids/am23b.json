@@ -1,0 +1,73 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w",
+        "EchoTime": 0.1
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_task-fmri",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri",
+      "criteria": {
+        "SeriesDescription": "task-stories r1"
+      },
+      "sidecar_changes": {
+        "TaskName": "stories"
+      }
+    },
+    {
+      "id": "id_task-fmri2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri",
+      "criteria": {
+        "SeriesDescription": "task-stories r2"
+      },
+      "sidecar_changes": {
+        "TaskName": "stories"
+      }
+    },
+    {
+      "id": "id_task-fmri3",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri",
+      "criteria": {
+        "SeriesDescription": "task-stories r3"
+      },
+      "sidecar_changes": {
+        "TaskName": "stories"
+      }
+    },
+    {
+      "id": "id_task-cet",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri",
+      "criteria": {
+        "SeriesDescription": "task-cet"
+      },
+      "sidecar_changes": {
+        "TaskName": "cet"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri" , "id_task-fmri2" , "id_task-fmri3" , "id_task-cet"]
+      }
+    }
+  ]
+}
