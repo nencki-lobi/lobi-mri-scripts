@@ -1,0 +1,80 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "ABCD_T1w_MPR_vNav",
+        "EchoTime": 0.1
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "datatype": "anat",
+      "suffix": "T2w",
+      "criteria": {
+        "SeriesDescription": "ABCD_T2w_SPC_vNav",
+        "EchoTime": 0.1
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T2"
+      }
+    },
+    {
+      "id": "alicja_1",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-alicja_run-01_acq-hcp"
+      },
+      "sidecar_changes": {
+        "TaskName": "alicja"
+      }
+    },
+    {
+      "id": "alicja_2",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-alicja_run-02_acq-hcp"
+      },
+      "sidecar_changes": {
+        "TaskName": "alicja"
+      }
+    },
+    {
+      "id": "alicja_2_std",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-01_acq-std"
+      },
+      "sidecar_changes": {
+        "TaskName": "alicja"
+      }
+    },
+
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_??"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["alicja_1" , "alicja_2"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*_std"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["alicja_2_std"]
+      }
+    }
+  ]
+}
