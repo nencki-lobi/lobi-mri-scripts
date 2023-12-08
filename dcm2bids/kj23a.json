@@ -4,8 +4,7 @@
       "datatype": "anat",
       "suffix": "T1w",
       "criteria": {
-        "SeriesDescription": "ABCD_T1w_MPR_vNav",
-        "EchoTime": 0.1
+        "SeriesDescription": "ABCD_T1w_MPR_vNav"
       },
       "sidecar_changes": {
         "ProtocolName": "T1"
@@ -15,8 +14,7 @@
       "datatype": "anat",
       "suffix": "T2w",
       "criteria": {
-        "SeriesDescription": "ABCD_T2w_SPC_vNav",
-        "EchoTime": 0.1
+        "SeriesDescription": "ABCD_T2w_SPC_vNav"
       },
       "sidecar_changes": {
         "ProtocolName": "T2"
