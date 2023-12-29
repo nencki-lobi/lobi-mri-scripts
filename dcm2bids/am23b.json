@@ -1,11 +1,12 @@
+#required https://github.com/UNFmontreal/Dcm2Bids/tree/4955ac506e33fe833251d9bc261992ff0ee2d2f9 (not 3.1.1)
+
 {
   "descriptions": [
     {
       "datatype": "anat",
       "suffix": "T1w",
       "criteria": {
-        "SeriesDescription": "anat_t1w",
-        "EchoTime": 0.1
+        "SeriesDescription": "anat_t1w"
       },
       "sidecar_changes": {
         "ProtocolName": "T1"
@@ -15,7 +16,6 @@
       "id": "id_task-fmri",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri",
       "criteria": {
         "SeriesDescription": "task-stories r1"
       },
@@ -27,7 +27,6 @@
       "id": "id_task-fmri2",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri",
       "criteria": {
         "SeriesDescription": "task-stories r2"
       },
@@ -39,7 +38,6 @@
       "id": "id_task-fmri3",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri",
       "criteria": {
         "SeriesDescription": "task-stories r3"
       },
@@ -51,7 +49,6 @@
       "id": "id_task-cet",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri",
       "criteria": {
         "SeriesDescription": "task-cet"
       },
