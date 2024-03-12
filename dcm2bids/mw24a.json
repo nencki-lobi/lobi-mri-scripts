@@ -1,0 +1,71 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "task1"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "task1"
+      }
+    },
+    {
+      "id": "id_task2-fmri_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri2",
+      "criteria": {
+        "SeriesDescription": "task2-fmri_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "task2"
+      }
+    },
+    {
+      "id": "id_task2-fmri_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-fmri2",
+      "criteria": {
+        "SeriesDescription": "task2-fmri_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "task2"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02" , "id_task2-fmri_run-01" , "id_task2-fmri_run-02"]
+      }
+    }
+  ]
+}

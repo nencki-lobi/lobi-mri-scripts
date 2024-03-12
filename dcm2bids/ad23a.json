@@ -1,0 +1,119 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_task-fastloc_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fastloc_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "fastloc"
+      }
+    },
+    {
+      "id": "id_task-fastloc_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fastloc_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "fastloc"
+      }
+    },
+
+    {
+      "id": "id_task-symbols_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-symbols_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "symbols"
+      }
+    },
+
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-symbols_run-01" , "id_task-fastloc_run-01" , "id_task-fastloc_run-02" ]
+      }
+    },
+
+    {
+      "id": "id_task-baba_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-baba_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "baba"
+      }
+    },
+    {
+      "id": "id_task-baba_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-baba_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "baba"
+      }
+    },
+    {
+      "id": "id_task-baba_run-03",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-baba_run-03"
+      },
+      "sidecar_changes": {
+        "TaskName": "baba"
+      }
+    },
+    {
+      "id": "id_task-baba_run-04",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-baba_run-04"
+      },
+      "sidecar_changes": {
+        "TaskName": "baba"
+      }
+    },
+    
+
+      {
+        "datatype": "fmap",
+        "suffix": "epi",
+        "custom_entities": "acq-hcp",
+        "criteria": {
+          "SeriesDescription": "SpinEchoFieldMap*",
+          "BaseResolution": 104
+        },
+        "sidecar_changes": {
+          "intendedFor": ["id_task-baba_run-01" , "id_task-baba_run-02" , "id_task-baba_run-03", "id_task-baba_run-04" ]
+        }
+    }
+  ]
+}
