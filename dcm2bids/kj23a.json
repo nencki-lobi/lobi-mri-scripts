@@ -4,6 +4,28 @@
       "datatype": "anat",
       "suffix": "T1w",
       "criteria": {
+        "SeriesDescription": "t1_mprage_sag_p4_0.9iso"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+
+    {
+      "datatype": "anat",
+      "suffix": "T2w",
+      "criteria": {
+        "SeriesDescription": "t2_space_sag_iso_p4_2X2"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T2"
+      }
+    },
+
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
         "SeriesDescription": "ABCD_T1w_MPR_vNav"
       },
       "sidecar_changes": {
