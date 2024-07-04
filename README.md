@@ -10,6 +10,9 @@ Available run scripts:
 ./run_fmriprep_min.sh subject bids_dir
 
 ```
-Caution! Currently fmriprep does not recognize BIDS-URIs produced by dcm2bids. Please run first ``find bids_root -iname *dir*.json -exec ./fmriprep/json_fmaps_repair.sh {} \;``
+Caution! Currently [fmriprep does not recognize BIDS-URIs](https://github.com/nipreps/sdcflows/pull/349) produced by dcm2bids. Please repair fieldamaps' jsons with this command first:
+```
+find bids_root -iname *dir*.json -exec ./fmriprep/json_fmaps_repair.sh {} \;
+```
 
 
