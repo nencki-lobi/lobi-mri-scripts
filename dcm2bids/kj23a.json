@@ -47,7 +47,7 @@
       "datatype": "func",
       "suffix": "bold",
       "criteria": {
-        "SeriesDescription": "task-alicja_run-01_acq-hcp"
+        "SeriesDescription": "task-alicja_run-01_acq-std"
       },
       "sidecar_changes": {
         "TaskName": "alicja"
@@ -58,18 +58,7 @@
       "datatype": "func",
       "suffix": "bold",
       "criteria": {
-        "SeriesDescription": "task-alicja_run-02_acq-hcp"
-      },
-      "sidecar_changes": {
-        "TaskName": "alicja"
-      }
-    },
-    {
-      "id": "alicja_2_std",
-      "datatype": "func",
-      "suffix": "bold",
-      "criteria": {
-        "SeriesDescription": "task-fmri_run-01_acq-std"
+        "SeriesDescription": "task-alicja_run-02_acq-std"
       },
       "sidecar_changes": {
         "TaskName": "alicja"
@@ -77,10 +66,22 @@
     },
 
     {
+      "id": "rest_hcp",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      } 
+    },
+
+    {
       "datatype": "fmap",
       "suffix": "epi",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap_??"
+        "SeriesDescription": "SpinEchoFieldMap_??_std"
       },
       "sidecar_changes": {
         "intendedFor": ["alicja_1" , "alicja_2"]
@@ -90,10 +91,10 @@
       "datatype": "fmap",
       "suffix": "epi",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap*_std"
+        "SeriesDescription": "SpinEchoFieldMap_??_hcp"
       },
       "sidecar_changes": {
-        "intendedFor": ["alicja_2_std"]
+        "intendedFor": ["rest_hcp"]
       }
     }
   ]

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Run using GNU parallel. BE careful with numbering of columns inn CSV
-#tail -n +2 $subject_list | parallel -j 4 --colsep ',' run_dcm2bids.sh {1} {4} {5} 
-    
+# Run using GNU parallel. Be careful with numbering of columns in CSV
+#tail -n +2 $subject_list | parallel -j 4 --colsep ',' run_dcm2bids.sh "{1}" {4} {5} 
+
 MR_ID="$1"
 Subject="$2"
 Session="$3"
@@ -12,22 +12,21 @@ if [[ -z "$MR_ID" ]]; then
   exit 1
 fi
 
-
 # Default Session to "01" if not provided
-#if [[ -z "$Session" ]]; then
-#    Session="01"
 if [[ "$Session" == *"2"* ]]; then
     Session="02"
 else
-    Session="01"
+    Session="011"
 fi
 
 echo "Running dcm2bids for Subject: $Subject, Session: $Session"
 
-# Define the dcm2bids command
+# Split MR_ID and build the -d options. Remeber to put MR_ID in "" if there there are two and more. 
+IFS=' ' read -r -a mr_id_array <<< "$MR_ID"
+
+# Initialize command array with common elements
 command=(
     'dcm2bids'
-    '-d' "./sourcedata/$MR_ID"
     '-p' "$Subject"
     '-s' "$Session"
     '-c' './code/config.json'
@@ -35,5 +34,11 @@ command=(
     '--auto_extract_entities'
 )
 
+# Append -d options to the command array
+for id in "${mr_id_array[@]}"; do
+    command+=('-d' "./sourcedata/$id")
+done
+
 # Execute the command
-"${command[@]}"
+echo "${command[@]}"
+#"${command[@]}"
