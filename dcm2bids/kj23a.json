@@ -23,26 +23,6 @@
     },
 
     {
-      "datatype": "anat",
-      "suffix": "T1w",
-      "criteria": {
-        "SeriesDescription": "ABCD_T1w_MPR_vNav"
-      },
-      "sidecar_changes": {
-        "ProtocolName": "T1"
-      }
-    },
-    {
-      "datatype": "anat",
-      "suffix": "T2w",
-      "criteria": {
-        "SeriesDescription": "ABCD_T2w_SPC_vNav"
-      },
-      "sidecar_changes": {
-        "ProtocolName": "T2"
-      }
-    },
-    {
       "id": "alicja_1",
       "datatype": "func",
       "suffix": "bold",
@@ -70,7 +50,23 @@
       "datatype": "func",
       "suffix": "bold",
       "criteria": {
-        "SeriesDescription": "task-rest_acq-hcp"
+        "SeriesDescription": "task-rest_acq-hcp",
+        "MultibandAccelerationFactor": {
+        "gt": "1"
+        }
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      } 
+    },
+
+    {
+      "id": "rest_hcp_sbref",
+      "datatype": "func",
+      "suffix": "sbref",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp",
+        "RawImage": false
       },
       "sidecar_changes": {
         "TaskName": "rest"
@@ -91,7 +87,7 @@
       "datatype": "fmap",
       "suffix": "epi",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap_??_hcp"
+        "SeriesDescription": "SpinEchoFieldMap_?? _hcp"
       },
       "sidecar_changes": {
         "intendedFor": ["rest_hcp"]
