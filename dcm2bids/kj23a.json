@@ -87,7 +87,7 @@
       "datatype": "fmap",
       "suffix": "epi",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap_?? _hcp"
+        "SeriesDescription": "SpinEchoFieldMap_?? hcp"
       },
       "sidecar_changes": {
         "intendedFor": ["rest_hcp"]

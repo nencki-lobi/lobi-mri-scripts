@@ -16,7 +16,7 @@ fi
 if [[ "$Session" == *"2"* ]]; then
     Session="02"
 else
-    Session="011"
+    Session="01"
 fi
 
 echo "Running dcm2bids for Subject: $Subject, Session: $Session"
@@ -41,4 +41,4 @@ done
 
 # Execute the command
 echo "${command[@]}"
-#"${command[@]}"
+"${command[@]}"
