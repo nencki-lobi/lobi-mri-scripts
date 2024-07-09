@@ -23,6 +23,10 @@ echo "Running dcm2bids for Subject: $Subject, Session: $Session"
 
 # Split MR_ID and build the -d options. Remeber to put MR_ID in "" if there there are two and more. 
 IFS=' ' read -r -a mr_id_array <<< "$MR_ID"
+dirs=()
+for id in "${mr_id_array[@]}"; do
+    dirs+=("./sourcedata/$id")
+done
 
 # Initialize command array with common elements
 command=(
@@ -31,13 +35,9 @@ command=(
     '-s' "$Session"
     '-c' './code/config.json'
     '-o' './'
+    '-d' "${dirs[@]}"
     '--auto_extract_entities'
 )
-
-# Append -d options to the command array
-for id in "${mr_id_array[@]}"; do
-    command+=('-d' "./sourcedata/$id")
-done
 
 # Execute the command
 echo "${command[@]}"
