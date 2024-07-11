@@ -1,0 +1,67 @@
+{
+    "descriptions": [
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "SeriesDescription": "*T1W_3D*"
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2w",
+            "criteria": {
+                "SidecarFilename": "007*",
+                "EchoTime": 0.1
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "PD",
+            "criteria": {
+                "SeriesDescription": "*TSE*",
+                "EchoTime": 0.008
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "FLAIR",
+            "criteria": {
+                "SeriesDescription": "*FLAIR*"
+            }
+        },
+        {
+            "datatype": "dwi",
+            "suffix": "dwi",
+            "criteria": {
+                "SeriesDescription": "*DWI*"
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "SWI",
+            "criteria": {
+                "SeriesDescription": "*SWI*"
+            }
+        },
+        {
+            "datatype": "func",
+            "suffix": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "SeriesDescription": "rs_fMRI"
+            },
+            "sidecar_changes": {
+                "SeriesDescription": "rsfMRI"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "fmap",
+            "criteria": {
+                "SidecarFilename": "*echo-4*"
+            },
+            "IntendedFor": 5
+        }
+    ]
+}
