@@ -4,64 +4,97 @@
             "datatype": "anat",
             "suffix": "T1w",
             "criteria": {
-                "SeriesDescription": "*T1W_3D*"
-            }
-        },
-        {
-            "datatype": "anat",
-            "suffix": "T2w",
-            "criteria": {
-                "SidecarFilename": "007*",
-                "EchoTime": 0.1
-            }
-        },
-        {
-            "datatype": "anat",
-            "suffix": "PD",
-            "criteria": {
-                "SeriesDescription": "*TSE*",
-                "EchoTime": 0.008
+                "SeriesDescription": "T1w_MPR",
+                "ImageTypeText": ["ORIGINAL", "PRIMARY", "M", "DIS2D"]
             }
         },
         {
             "datatype": "anat",
             "suffix": "FLAIR",
             "criteria": {
-                "SeriesDescription": "*FLAIR*"
+                "SeriesDescription": "t2_spc_da-fl_sag_p2_iso"
+            }
+        },
+
+        {
+            "datatype": "anat",
+            "suffix": "MP2RAGE",
+            "custom_entities": "inv-1",
+            "criteria": {
+                "SeriesDescription": "t1_mp2rage*INV1"
             }
         },
         {
+            "datatype": "anat",
+            "suffix": "MP2RAGE",
+            "custom_entities": "inv-2",
+            "criteria": {
+                "SeriesDescription": "t1_mp2rage*INV2"
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "UNIT1",
+            "criteria": {
+                "SeriesDescription": "t1_mp2rage*UNI*"
+            }
+        },
+
+        {
+            "datatype": "anat",
+            "suffix": "FLAIR",
+            "custom_entities": "acq-dir",
+            "criteria": {
+                "SeriesDescription": "dir_space*"
+            }
+        },
+
+        {
+            "id": "dwi_98",
             "datatype": "dwi",
             "suffix": "dwi",
+            "custom_entities": "acq-dir98",
             "criteria": {
-                "SeriesDescription": "*DWI*"
+                "SeriesDescription": "dMRI_dir98_AP"
+            }
+        },
+        {
+            "id": "dwi_99",
+            "datatype": "dwi",
+            "suffix": "dwi",
+            "custom_entities": "acq-dir99",
+            "criteria": {
+                "SeriesDescription": "dMRI_dir99_AP"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "criteria": {
+              "SeriesDescription": "dMRI_SpinEchoFieldMap_??"
+            },
+            "sidecar_changes": {
+              "intendedFor": ["dwi_98", "dwi_99"]
+            }
+        },
+
+        {
+            "datatype": "anat",
+            "suffix": "SWI",
+            "custom_entities": "part-mag",
+            "criteria": {
+                "SeriesDescription": "t2_fl3d_tra_p2_swi",
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
             }
         },
         {
             "datatype": "anat",
             "suffix": "SWI",
+            "custom_entities": "part-phase",
             "criteria": {
-                "SeriesDescription": "*SWI*"
+                "SeriesDescription": "t2_fl3d_tra_p2_swi",
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
             }
-        },
-        {
-            "datatype": "func",
-            "suffix": "bold",
-            "customLabels": "task-rest",
-            "criteria": {
-                "SeriesDescription": "rs_fMRI"
-            },
-            "sidecar_changes": {
-                "SeriesDescription": "rsfMRI"
-            }
-        },
-        {
-            "datatype": "fmap",
-            "suffix": "fmap",
-            "criteria": {
-                "SidecarFilename": "*echo-4*"
-            },
-            "IntendedFor": 5
         }
     ]
 }
