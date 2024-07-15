@@ -26,6 +26,7 @@
       "id": "alicja_1",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-alicja1",
       "criteria": {
         "SeriesDescription": "task-alicja_run-01_acq-std"
       },
@@ -37,6 +38,7 @@
       "id": "alicja_2",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-alicja2",
       "criteria": {
         "SeriesDescription": "task-alicja_run-02_acq-std"
       },
@@ -65,8 +67,7 @@
       "datatype": "func",
       "suffix": "sbref",
       "criteria": {
-        "SeriesDescription": "task-rest_acq-hcp",
-        "RawImage": false
+        "SeriesDescription": "task-rest_acq-hcp_SBRef"
       },
       "sidecar_changes": {
         "TaskName": "rest"
