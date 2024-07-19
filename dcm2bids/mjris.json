@@ -95,6 +95,107 @@
                 "SeriesDescription": "t2_fl3d_tra_p2_swi",
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
             }
+        },
+
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-1_part-mag",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 1,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-1_part-phase",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 1,
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-2_part-mag",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 2,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-2_part-phase",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 2,
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-3_part-mag",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 3,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-3_part-phase",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 3,
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-4_part-mag",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 4,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-4_part-phase",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 4,
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-5_part-mag",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 5,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2starw",
+            "custom_entities": "echo-5_part-phase",
+            "criteria": {
+                "SeriesDescription": "qsm 5TEs",
+                "EchoNumber": 5,
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
         }
     ]
 }
