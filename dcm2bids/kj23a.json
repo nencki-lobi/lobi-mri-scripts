@@ -31,7 +31,7 @@
         "SeriesDescription": "task-alicja_run-01_acq-std"
       },
       "sidecar_changes": {
-        "TaskName": "alicja"
+        "TaskName": "alicja1"
       }
     },
     {
@@ -43,7 +43,7 @@
         "SeriesDescription": "task-alicja_run-02_acq-std"
       },
       "sidecar_changes": {
-        "TaskName": "alicja"
+        "TaskName": "alicja2"
       }
     },
 
@@ -51,6 +51,7 @@
       "id": "rest_hcp",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "task-rest_acq-hcp",
         "MultibandAccelerationFactor": {
@@ -66,6 +67,7 @@
       "id": "rest_hcp_sbref",
       "datatype": "func",
       "suffix": "sbref",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "task-rest_acq-hcp_SBRef"
       },
@@ -77,8 +79,9 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
+      "custom_entities": "acq-std_dir-AP",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap_??_std"
+        "SeriesDescription": "SpinEchoFieldMap_AP_std"
       },
       "sidecar_changes": {
         "intendedFor": ["alicja_1" , "alicja_2"]
@@ -87,8 +90,31 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
+      "custom_entities": "acq-std_dir-PA",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap_?? hcp"
+        "SeriesDescription": "SpinEchoFieldMap_PA_std"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["alicja_1" , "alicja_2"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp_dir-AP",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_AP hcp"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["rest_hcp"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp_dir-PA",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_PA hcp"
       },
       "sidecar_changes": {
         "intendedFor": ["rest_hcp"]
