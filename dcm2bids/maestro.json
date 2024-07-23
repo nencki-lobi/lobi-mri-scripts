@@ -1,0 +1,64 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "t1_mpr_iso"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+
+
+    {
+      "id": "ventral_1",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-ventral1",
+      "criteria": {
+        "SeriesDescription": "task-ventral_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "ventral1"
+      }
+    },
+    {
+      "id": "ventral_2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-ventral2",
+      "criteria": {
+        "SeriesDescription": "task-ventral_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "ventral2"
+      }
+    },
+    {
+      "id": "ventral_3",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-ventral3",
+      "criteria": {
+        "SeriesDescription": "task-ventral_run-03"
+      },
+      "sidecar_changes": {
+        "TaskName": "ventral3"
+      }
+    },
+    {
+      "id": "ventral_4",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-ventral4",
+      "criteria": {
+        "SeriesDescription": "task-ventral_run-04"
+      },
+      "sidecar_changes": {
+        "TaskName": "ventral4"
+      }
+    }
+  ]
+}

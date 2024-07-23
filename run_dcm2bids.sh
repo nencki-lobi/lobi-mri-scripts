@@ -13,7 +13,11 @@ if [[ -z "$MR_ID" ]]; then
 fi
 
 # Default Session to "01" if not provided
-if [[ "$Session" == *"2"* ]]; then
+if [[ "$Session" == *"4"* ]]; then
+    Session="04"
+elif [[ "$Session" == *"3"* ]]; then
+    Session="03"
+elif [[ "$Session" == *"2"* ]]; then
     Session="02"
 else
     Session="01"
