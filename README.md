@@ -1,9 +1,13 @@
-Manual for DICOM to BIDS is available on our website [lobi.nencki.gov.pl/dla-badaczy/know-how/data-export)](https://sites.google.com/nencki.edu.pl/lobi-informacja-dla-badaczy/know-how/data-export)
+## LOBI scripts for MRI data processing
+
+A general manual on dealing with MRI data is available on our website [lobi.nencki.gov.pl/dla-badaczy/know-how/get-data)](https://sites.google.com/nencki.edu.pl/lobi-informacja-dla-badaczy/know-how/get-data)
 
 Available run scripts:
 
 ```
 ./run_dcm2bids.sh xnat_id subject [session]
+
+./run_dcm2bids_noauto.sh xnat_id subject [session] - to be used without --auto_extract_entities i.e. runs
 
 ./run_mriqc.sh subject bids_dir
 
