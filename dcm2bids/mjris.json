@@ -196,6 +196,38 @@
                 "EchoNumber": 5,
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
             }
+        },
+        {
+            "datatype": "mrs",
+            "suffix": "svs",
+            "custom_entities": "label-lesion",
+            "criteria": {
+		        "ProtocolName": "nawm_ris_special"
+            }
+        },
+        {
+            "datatype": "mrs",
+            "suffix": "svs",
+            "custom_entities": "label-lesion",
+            "criteria": {
+		        "ProtocolName": "lesion_ris_special"
+            }
+        },
+        {
+            "datatype": "mrs",
+            "suffix": "svs",
+            "custom_entities": "label-nawm_acq-conc",
+            "criteria": {
+		        "ProtocolName": "nawm_ris_special*?"
+            }
+        },
+        {
+            "datatype": "mrs",
+            "suffix": "svs",
+            "custom_entities": "label-lesion_acq-conc",
+            "criteria": {
+		        "ProtocolName": "lesion_ris_special*?"
+            }
         }
     ]
 }

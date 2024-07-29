@@ -18,11 +18,12 @@ You can dcm2bids and relevant configuration such as:
 ```
     {
         "datatype": "mrs",
-        "suffix": "press",
+        "suffix": "svs",
+        "custom_entities": "label-lesion",
         "criteria": {
-            "ProtocolName": "nawm_ris_special"
+            "ProtocolName": "lesion_ris_special"
         }
-    } 
+    }
 ```
 
 But first You'll need to manually save spectroscopy as NiFTI files.
