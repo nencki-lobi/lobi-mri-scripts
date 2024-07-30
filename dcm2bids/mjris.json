@@ -200,7 +200,7 @@
         {
             "datatype": "mrs",
             "suffix": "svs",
-            "custom_entities": "label-lesion",
+            "custom_entities": "label-nawm",
             "criteria": {
 		        "ProtocolName": "nawm_ris_special"
             }
