@@ -1,4 +1,4 @@
-## How to convert Siemens TWIX spectroscopy to NiFTI/BIDS
+## ls_dat.sh - get meaningful Patient ID from Siemens RAW file
 
 Prepare Your dictionary with relevant subjects' names using ls_dat.sh
 
@@ -13,25 +13,13 @@ mjris#Sprisma#F9543#M209#D100223#T153155#nawm_ris_special.dat,MJRIS_004,4
 mjris#Sprisma#F9545#M211#D100223#T153643#nawm_ris_special_NWS.dat,MJRIS_004,4
 ```
 
-You can dcm2bids and relevant configuration such as:
+[Then You can follow our manual for MRS2BIDS](MRS2BIDS.md)
 
-```
-    {
-        "datatype": "mrs",
-        "suffix": "svs",
-        "custom_entities": "label-lesion",
-        "criteria": {
-            "ProtocolName": "lesion_ris_special"
-        }
-    }
-```
+## equalize.py - itertively apodize MRS to a target FWHM of Creatine peak
 
-But first You'll need to manually save spectroscopy as NiFTI files.
-Use spec2nii to convert TWIX files and place them in tmp_dcm2bids:
-
+python equalize.py rest.nii.gz stim.nii.gz will check initial width of Creatine peak and iteratively apodize one of them to match target value. You can use optional arguments such as:
 ```
-tail -n +2 ./list.csv | parallel -j 4 --colsep ',' echo spec2nii twix -e image -j -o tmp_dcm2bids/sub-{3}_ses-01 sourcedata/spectro/{1}
-```
-
-Run dcm2bids again
+--fwhm_target XX to provide subjective target value
+--basis_location to modify the default basis set
+``
 
