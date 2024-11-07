@@ -11,6 +11,28 @@
       }
     },
     {
+      "id": "id_rest",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      }
+    },
+    {
+      "id": "id_rest_sbref",
+      "datatype": "func",
+      "suffix": "sbref",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp_SBRef"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      }
+    },
+    {
       "id": "id_task-fmri_run-01",
       "datatype": "func",
       "suffix": "bold",
@@ -65,6 +87,18 @@
       },
       "sidecar_changes": {
         "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02" , "id_task2-fmri_run-01" , "id_task2-fmri_run-02"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 104
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_rest"]
       }
     }
   ]

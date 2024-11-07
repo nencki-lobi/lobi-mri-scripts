@@ -1,0 +1,47 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "effort"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "nback"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02"]
+      }
+    }
+  ]
+}
