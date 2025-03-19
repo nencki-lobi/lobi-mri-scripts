@@ -1,7 +1,11 @@
 #!/bin/bash
 
+echo "auto-extract-entities enabled"
+
 # Run using GNU parallel. Be careful with numbering of columns in CSV
 #tail -n +2 $subject_list | parallel -j 4 --colsep ',' run_dcm2bids.sh "{1}" {4} {5} 
+
+SCRIPTS=$(dirname "$(realpath "$0")")
 
 MR_ID="$1"
 Subject="$2"
@@ -46,3 +50,6 @@ command=(
 # Execute the command
 echo "${command[@]}"
 "${command[@]}"
+
+echo "Fieldmaps' paths will be repaired"
+find sub-KJ012 -type f -path "*/fmap/*.json" -exec $SCRIPTS/fmriprep/json_fmaps_repair.sh {} \;
