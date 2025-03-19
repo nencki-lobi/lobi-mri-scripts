@@ -3,6 +3,10 @@
 # Run using GNU parallel. Be careful with numbering of columns in CSV
 #tail -n +2 $subject_list | parallel -j 4 --colsep ',' run_dcm2bids.sh "{1}" {4} {5} 
 
+#no_auto - use only when task name is specified within the config file
+
+SCRIPTS=$(dirname "$(realpath "$0")")
+
 MR_ID="$1"
 Subject="$2"
 Session="$3"
@@ -45,3 +49,6 @@ command=(
 # Execute the command
 echo "${command[@]}"
 "${command[@]}"
+
+echo "Fieldmaps' paths will be repaired"
+find sub-"$Subject" -type f -path "*/fmap/*.json" -exec $SCRIPTS/fmriprep/json_fmaps_repair.sh {} \;

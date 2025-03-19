@@ -52,4 +52,4 @@ echo "${command[@]}"
 "${command[@]}"
 
 echo "Fieldmaps' paths will be repaired"
-find sub-KJ012 -type f -path "*/fmap/*.json" -exec $SCRIPTS/fmriprep/json_fmaps_repair.sh {} \;
+find sub-"$Subject" -type f -path "*/fmap/*.json" -exec $SCRIPTS/fmriprep/json_fmaps_repair.sh {} \;
