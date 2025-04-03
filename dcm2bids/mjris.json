@@ -10,6 +10,15 @@
         },
         {
             "datatype": "anat",
+            "suffix": "T1w",
+            "custom_entities": "acq-norm",
+            "criteria": {
+                "SeriesDescription": "T1w_MPR",
+                "ImageTypeText": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+            }
+        },
+        {
+            "datatype": "anat",
             "suffix": "FLAIR",
             "criteria": {
                 "SeriesDescription": "t2_spc_da-fl_sag_p2_iso"
