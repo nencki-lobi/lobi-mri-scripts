@@ -1,7 +1,10 @@
+const imageExtension = 'svg'; 
+
 document.addEventListener('DOMContentLoaded', () => {
     let originalData; // Variable to store the original data
     const table = document.getElementById('csv-table');
     const commandField = document.getElementById('command-field');
+
 
 // Fetch data from the server
 fetch('/data.csv')
@@ -78,10 +81,15 @@ fetch('/data.csv')
 			});
 
             const imgTd = document.createElement('td');
+            const container = document.createElement('div');
+            
+            container.classList.add('image-container');
+
             const img = document.createElement('img');
-            img.src = `imgs/${subjId}.jpg`; // Assuming images are named as subjId.jpg
-            img.classList.add('thumbnail'); // Optional: Add a CSS class for styling images
-            imgTd.appendChild(img);
+            img.src = `imgs/${subjId}.${imageExtension}`; // Assuming images are named as subjId.jpg
+
+            container.appendChild(img);
+            imgTd.appendChild(container);
             tr.appendChild(imgTd);
 
             const commandButton = document.createElement('button');

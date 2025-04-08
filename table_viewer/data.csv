@@ -1,6 +1,6 @@
-header,p1,p2,good
-low,1.2,0,good
-high,2.5,4,good
-aaa,1,2,rerun
-aaa,2,3,good
-aaa,3,4,good
+header,p1,p2,p1,p2,p1,p2,p1,p2,good
+low,1.2,0,1.2,0,1.2,0,1.2,0,good
+high,2.5,4,1.2,0,1.2,0,1.2,0,good
+aaa,1,2,1.2,0,1.2,0,1.2,0,rerun
+kj005,2,3,1.2,0,1.2,0,1.2,0,good
+aaa,3,4,1.2,0,1.2,0,1.2,0,good
