@@ -1,1 +1,3 @@
 .DS_Store
+table_viewer/imgs/*.svg
+table_viewer/imgs/*.jpg

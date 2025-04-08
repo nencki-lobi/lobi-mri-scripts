@@ -21,7 +21,8 @@ fetch('/data.csv')
 
             if (subjId === 'low') {
                 lowerBounds = columns.slice(1).map(Number);
-            } else if (subjId === 'high') {
+            } 
+            if (subjId === 'high') {
                 upperBounds = columns.slice(1).map(Number);
             }
         });
@@ -31,8 +32,8 @@ fetch('/data.csv')
             const columns = row.split(',');
             const subjId = columns[0].trim();
 
-            // Skip rows with identifiers "low" and "high"
-            if (subjId === 'low' || subjId === 'high') {
+            // Skip rows with identifiers "low" and "high" and empty ones
+            if (subjId === '' || subjId === 'low' || subjId === 'high') {
                 return;
             }
 
