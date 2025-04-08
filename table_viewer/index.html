@@ -17,28 +17,38 @@
             text-align: left;
         }
 
-        #image-container {
-            margin-top: 20px;
-        }
+        .image-container {
+            width: 400px;
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #aaa;
+            }
 
-        #image-container img {
-            max-width: 100%;
+            .image-container img {
+            position: absolute;
+            bottom: 5px; /* image shift right */
+            left: -20px; /* image shift left */
+            width: 600px; /* image zoom */
             height: auto;
-        }
+            }
+
         input[type="text"] {
-            width: 600px; /* Adjust the width as needed */
-            padding: 5px; /* Adjust the padding as needed */
+            width: 600px;
+            padding: 5px;
         }
         button {
-            margin-top: 10px; /* Adjust the margin as needed */
+            margin-top: 10px;
             padding: 8px;
         }
     </style>
 </head>
 <body>
-    <input type="text" id="command-field" placeholder="Enter custom command here. Use $subj as variable name.">
+    <div id="buttons" style="margin-bottom: 10px;">
     <button id="save-button">Save CSV</button>
-    <div id="space-div" style="margin-bottom: 10px;"></div>
+    </div>
+
+    <div id="table" style="margin-bottom: 10px;">
     
     <table id="csv-table">
         <!-- CSV data will be inserted here dynamically using JavaScript -->
@@ -46,7 +56,15 @@
     <div id="image-container">
         <!-- Images will be displayed here dynamically using JavaScript -->
     </div>
-    
+    </div>
+
+    <div id="buttons" style="margin-bottom: 10px;"></div>
+   Run command: <input type="text" id="command-field" placeholder="open -a Safari $subj.html">
+    </div>
+
     <script src="script.js"></script>
+
+
+
 </body>
 </html>

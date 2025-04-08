@@ -1,0 +1,28 @@
+Executing with: 
+Executing with: open aaa
+Executing with: open aaa
+Executing with: open aaa
+Executing with: open aaa
+Executing with: open aaa
+Executing with: open aaa.html
+Executing with: open -a aaa.html
+Executing with: open -a kj005.html
+Executing with: open -a kj005.html
+Executing with: open -a Safari aaa.html
+Executing with: open -a Safari index.html
+Executing with: open -a Safari index.html
+Executing with: open -a Safari index.html
+Executing with: open index.html
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: 
+Executing with: open -a Safari aaa.html
