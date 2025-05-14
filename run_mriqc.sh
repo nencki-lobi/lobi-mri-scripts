@@ -21,6 +21,6 @@ participant \
 --verbose-reports \
 --no-sub \
 -w $work/$subj \
---modalities dwi
+--modalities T1w bold
 
 rm -rf $work/$subj
