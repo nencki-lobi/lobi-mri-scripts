@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Fetch data from the server
-fetch('/data.csv')
+fetch('data.csv')
     .then(response => response.text())
     .then(data => {
         originalData = data; // Store the original data
