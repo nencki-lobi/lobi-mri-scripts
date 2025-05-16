@@ -1,4 +1,5 @@
-const imageExtension = 'svg'; 
+const imageExtension = 'svg';
+const link = '/'; // images will be hyperlinked with "/" or different server such as http://localhost:8001/
 
 document.addEventListener('DOMContentLoaded', () => {
     let originalData; // Variable to store the original data
@@ -86,10 +87,15 @@ fetch('data.csv')
             
             container.classList.add('image-container');
 
+            const link = document.createElement('a');
+            link.href = `${link}/${subjId}.html`;
+            link.target = '_blank';
+	
             const img = document.createElement('img');
             img.src = `imgs/${subjId}.${imageExtension}`; // Assuming images are named as subjId.jpg
 
-            container.appendChild(img);
+            link.appendChild(img);
+            container.appendChild(link);
             imgTd.appendChild(container);
             tr.appendChild(imgTd);
 
