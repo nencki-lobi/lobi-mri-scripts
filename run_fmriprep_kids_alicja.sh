@@ -17,15 +17,16 @@ export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
 fmriprep $root_dir \
          $output_dir \
          participant \
-         --fs-license-file $root_dir/code/freesurfer.txt \
+         --fs-license-file ~/freesurfer.txt \
          --fs-no-reconall \
          --participant-label $subj \
+         --bids-filter-file $root_dir/code/bids_filter_alicja.json \
          --nprocs $nprocs --mem_mb $mem \
          --skip_bids_validation \
          -w $work/$subj \
-         --fd-spike-threshold 0.3 \
+         --fd-spike-threshold 0.5 \
          --skull-strip-template MNIPediatricAsym:cohort-2 \
-         --output-spaces MNIPediatricAsym:cohort-2:res-1 \
+         --output-spaces MNIPediatricAsym:cohort-2:res-2 \
          -v
 
 rm -rf $work/$subj

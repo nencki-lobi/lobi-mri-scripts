@@ -1,6 +1,7 @@
 ml mriqc
 
 root_dir=$(realpath "$2")
+output_dir=$(realpath "$3")
 subj=${1##*-}
 work=$(realpath ~/mriqc)
 
@@ -9,8 +10,8 @@ nthreads=10
 mem=20 #gb
 
 echo $work
-mriqc \
-$root_dir $root_dir/derivatives/mriqc  \
+~/mriqc-wrapper \
+$root_dir $output_dir \
 participant \
 --participant-label ${subj} \
 --fd_thres 0.3 \
@@ -21,6 +22,6 @@ participant \
 --verbose-reports \
 --no-sub \
 -w $work/$subj \
---modalities dwi
+--modalities T1w bold
 
 rm -rf $work/$subj

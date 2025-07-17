@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+export PWD=`pwd -P`
+singularity --silent exec --cleanenv --env DISPLAY=$DISPLAY  $neurodesk_singularity_opts --pwd "$PWD" --bind /home/jovyan/anatomical.py:/opt/conda/lib/python3.11/site-packages/mriqc/interfaces/anatomical.py /cvmfs/neurodesk.ardc.edu.au/containers/mriqc_24.0.2_20241108/mriqc_24.0.2_20241108.simg mriqc "$@"
