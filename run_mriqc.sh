@@ -1,5 +1,8 @@
 ml mriqc
 
+echo "using: mriqc mod to force fber calculation"
+script_dir="$(dirname "${BASH_SOURCE[0]}")"
+
 root_dir=$(realpath "$2")
 output_dir=$(realpath "$3")
 subj=${1##*-}
@@ -10,7 +13,8 @@ nthreads=10
 mem=20 #gb
 
 echo $work
-~/mriqc-wrapper \
+#mriqc
+$script_dir/mriqc/mriqc-wrapper \
 $root_dir $output_dir \
 participant \
 --participant-label ${subj} \
