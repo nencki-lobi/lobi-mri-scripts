@@ -1,0 +1,105 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_rest",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      }
+    },
+    {
+      "id": "id_rest_sbref",
+      "datatype": "func",
+      "suffix": "sbref",
+      "criteria": {
+        "SeriesDescription": "task-rest_acq-hcp_SBRef"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "task1"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-fmri_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "task1"
+      }
+    },
+    {
+      "id": "id_task-locgng",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-locgng",
+      "criteria": {
+        "SeriesDescription": "task-locgng"
+      },
+      "sidecar_changes": {
+        "TaskName": "locgng"
+      }
+    },
+    {
+      "id": "id_task-loc_gng",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-locgng",
+      "criteria": {
+        "SeriesDescription": "task-loc_gng"
+      },
+      "sidecar_changes": {
+        "TaskName": "locgng"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02" , "id_task-locgng", "id_task-loc_gng"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 104
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_rest"]
+      }
+    }
+  ]
+}

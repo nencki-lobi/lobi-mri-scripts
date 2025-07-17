@@ -1,4 +1,5 @@
-const imageExtension = 'svg'; 
+const imageExtension = 'svg';
+const link = '/'; // images will be hyperlinked with "/" or different server such as http://localhost:8001/
 
 document.addEventListener('DOMContentLoaded', () => {
     let originalData; // Variable to store the original data
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Fetch data from the server
-fetch('/data.csv')
+fetch('data.csv')
     .then(response => response.text())
     .then(data => {
         originalData = data; // Store the original data
@@ -21,7 +22,8 @@ fetch('/data.csv')
 
             if (subjId === 'low') {
                 lowerBounds = columns.slice(1).map(Number);
-            } else if (subjId === 'high') {
+            } 
+            if (subjId === 'high') {
                 upperBounds = columns.slice(1).map(Number);
             }
         });
@@ -31,8 +33,8 @@ fetch('/data.csv')
             const columns = row.split(',');
             const subjId = columns[0].trim();
 
-            // Skip rows with identifiers "low" and "high"
-            if (subjId === 'low' || subjId === 'high') {
+            // Skip rows with identifiers "low" and "high" and empty ones
+            if (subjId === '' || subjId === 'low' || subjId === 'high') {
                 return;
             }
 
@@ -85,10 +87,15 @@ fetch('/data.csv')
             
             container.classList.add('image-container');
 
+            const link = document.createElement('a');
+            link.href = `${link}/${subjId}.html`;
+            link.target = '_blank';
+	
             const img = document.createElement('img');
             img.src = `imgs/${subjId}.${imageExtension}`; // Assuming images are named as subjId.jpg
 
-            container.appendChild(img);
+            link.appendChild(img);
+            container.appendChild(link);
             imgTd.appendChild(container);
             tr.appendChild(imgTd);
 

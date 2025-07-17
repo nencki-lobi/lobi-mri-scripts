@@ -1,2 +1,4 @@
 .DS_Store
 .ipynb_checkpoints/
+table_viewer/imgs/*.svg
+table_viewer/imgs/*.jpg
