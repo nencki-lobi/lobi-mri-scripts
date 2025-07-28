@@ -119,6 +119,15 @@
       "sidecar_changes": {
         "intendedFor": ["rest_hcp"]
       }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "TB1TFL",
+      "custom_entities": "part-mag",
+      "criteria": {
+          "SeriesDescription": "rf_map",
+          "SequenceVariant": "SERVICE\\SP"
+      }
     }
   ]
 }
