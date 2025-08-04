@@ -1,4 +1,7 @@
 #!/bin/bash
+#run: repair_rfmap.sh sub-01/ses-01/fmap/sub-01_ses-01_part-phase_TB1TFL.nii.gz (from dcm2niix)
+#output: sub-01/ses-01/fmap/sub-01_ses-01_part-mag_TB1TFL.nii.gz and sub-01/ses-01/fmap/sub-01_ses-01_part-phase_TB1TFL.nii.gz
+
 INPUT_NII="$1"
 
 NUM_SLICES=$(fslval "$INPUT_NII" dim3)

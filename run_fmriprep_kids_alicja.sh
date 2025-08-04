@@ -1,3 +1,4 @@
+#!/bin/bash
 ml fmriprep
 
 echo "using: MNIPediatricAsym:cohort-2 which is adequate for 4.5 - 8.5 y/o"

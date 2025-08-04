@@ -1,9 +1,17 @@
+#!/bin/bash
+#usage: ./run_mriqc.sh <sub-XX> <bids_dir> </path/to/derivatives/mriqc>
 ml mriqc
 
-echo "using: mriqc mod to force fber calculation"
 script_dir="$(dirname "${BASH_SOURCE[0]}")"
 
-root_dir=$(realpath "$2")
+mriqc_ver=mriqc
+#mriqc_ver=$script_dir/mriqc/mriqc-wrapper
+
+if [ "$mriqc_ver" = "$script_dir/mriqc/mriqc-wrapper" ]; then
+	echo "using: mriqc mod to force fber calculation"
+fi
+
+bids_dir=$(realpath "$2")
 output_dir=$(realpath "$3")
 subj=${1##*-}
 work=$(realpath ~/mriqc)
@@ -13,9 +21,8 @@ nthreads=10
 mem=20 #gb
 
 echo $work
-#mriqc
-$script_dir/mriqc/mriqc-wrapper \
-$root_dir $output_dir \
+$mriqc_ver \
+$bids_dir $output_dir \
 participant \
 --participant-label ${subj} \
 --fd_thres 0.3 \
@@ -26,6 +33,6 @@ participant \
 --verbose-reports \
 --no-sub \
 -w $work/$subj \
---modalities T1w bold
+--modalities bold 
 
 rm -rf $work/$subj

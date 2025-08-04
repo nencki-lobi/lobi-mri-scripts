@@ -1,3 +1,4 @@
+#!/bin/bash
 ml fmriprep
 
 root_dir=$(realpath "$2")
