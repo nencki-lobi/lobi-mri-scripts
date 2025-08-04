@@ -1,4 +1,5 @@
 #!/bin/bash
+#usage: ./run_fmriprep.sh <sub-XX> <bids_dir>
 ml fmriprep
 
 root_dir=$(realpath "$2")
