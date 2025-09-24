@@ -1,0 +1,59 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-01",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-new_acq-ppgon_run1"
+      },
+      "sidecar_changes": {
+        "TaskName": "task"
+      }
+    },
+    {
+      "id": "id_task-fmri_run-02",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-new_acq-ppgon_run2"
+      },
+      "sidecar_changes": {
+        "TaskName": "task"
+      }
+    },
+
+    {
+      "id": "id_task-fmri_sbref",
+      "datatype": "func",
+      "suffix": "sbref",
+      "criteria": {
+        "SeriesDescription": "task-new*_SBRef"
+      },
+      "sidecar_changes": {
+        "TaskName": "task"
+      } 
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02"]
+      }
+    }
+  ]
+}
