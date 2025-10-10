@@ -16,6 +16,11 @@ export FS_ALLOW_DEEP=1
 export APPTAINERENV_FS_ALLOW_DEEP="$FS_ALLOW_DEEP"
 
 echo "SUBJECTS_DIR=$SUBJECTS_DIR"
-echo "Loading freesurfer..."
-ml freesurfer
-recon-all -version
+
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+	echo "Loading freesurfer..."
+	ml freesurfer
+	recon-all -version
+else
+	echo "Now You can load freesurfer eg. ml freesurfer/8.1.0"
+fi
