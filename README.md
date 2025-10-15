@@ -32,7 +32,7 @@ Custom configuration files for our projects:
 
 * **[`run_dcm2bids_noauto.sh xnat_id subject [session]`](./run_dcm2bids_noauto.sh)**
   ⚠️ **Deprecated:** this script has been replaced by the
-  [`xnat_dcm2bids` module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids)
+  [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module
   with the flag `--auto_extract_entities False`.  
   **Caution:** currently, [fMRIPrep does not recognize BIDS-URIs](https://github.com/nipreps/sdcflows/pull/349)
   produced by `dcm2bids` and the `run_dcm2bids_noauto.sh` script.
@@ -43,15 +43,7 @@ Custom configuration files for our projects:
 
 When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module,
 you can call these scripts conveniently via the `lobi_script` command:
-
-```bash
-lobi_script run_mriqc.sh sub-xx ./derivatives/mriqc
-```
-
-To list all available scripts:
-
-```bash
-lobi_script ls
-```
+`lobi_script run_mriqc.sh sub-xx ./derivatives/mriqc` or `lobi_script ls
+` to list all available scripts.
 
 
