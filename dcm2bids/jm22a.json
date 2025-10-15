@@ -4,28 +4,120 @@
       "datatype": "anat",
       "suffix": "T1w",
       "criteria": {
-        "SeriesDescription": "anat_t1w"
+        "SeriesDescription": "anat-T1w"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T1"
       }
     },
+      
     {
-      "id": "fmri",
+      "datatype": "anat",
+      "suffix": "T2w",
+      "criteria": {
+        "SeriesDescription": "t2_spc_sag_p2_iso"
+      },
+      "sidecar_changes": {
+        "ProtocolName": "T2"
+      }
+    },
+      
+    {
+    "datatype": "fmap",
+    "suffix": "magnitude1",
+    "criteria": {
+        "SeriesDescription": "gre_field_mapping",
+        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND", "MAGNITUDE"],
+        "EchoNumber": 1
+    },
+    "sidecar_changes": {
+        "intendedFor": ["id_rest", "mental_1", "mental_2", "move_1", "move_2"]
+    }
+  },
+    {
+    "datatype": "fmap",
+    "suffix": "magnitude2",
+    "criteria": {
+        "SeriesDescription": "gre_field_mapping",
+        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND", "MAGNITUDE"],
+        "EchoNumber": 2
+    },
+    "sidecar_changes": {
+        "intendedFor": ["id_rest", "mental_1", "mental_2", "move_1", "move_2"]
+    }
+  },
+  {
+    "datatype": "fmap",
+    "suffix":"phasediff",
+    "criteria": {
+        "SeriesDescription": "gre_field_mapping",
+        "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND", "PHASE"]
+    },
+    "sidecar_changes": {
+        "intendedFor": ["id_rest", "mental_1", "mental_2", "move_1", "move_2"]
+    }
+  },
+
+    {
+      "id": "move_1",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-move",
       "criteria": {
-        "SeriesDescription": "task-fmri*"
+        "SeriesDescription": "task-move_run-01"
       },
       "sidecar_changes": {
-        "TaskName": "test"
+        "TaskName": "move_run1"
       }
     },
     {
-      "datatype": "fmap",
-      "suffix": "epi",
+      "id": "move_2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-move",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap*"
+        "SeriesDescription": "task-move_run-02"
       },
       "sidecar_changes": {
-        "intendedFor": ["fmri"]
+        "TaskName": "move_run2"
+      }
+    },
+
+    {
+      "id": "mental_1",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-mental",
+      "criteria": {
+        "SeriesDescription": "task-mental_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "mental_run1"
+      }
+    },
+    {
+      "id": "mental_2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-mental",
+      "criteria": {
+        "SeriesDescription": "task-mental_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "mental_run2"
+      }
+    },
+      
+    {
+      "id": "id_rest",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-rest",
+      "criteria": {
+        "SeriesDescription": "task-rest"
+      },
+      "sidecar_changes": {
+        "TaskName": "rest"
       }
     }
   ]
