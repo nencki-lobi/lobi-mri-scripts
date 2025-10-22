@@ -128,6 +128,27 @@
           "SeriesDescription": "rf_map",
           "SequenceVariant": "SERVICE\\SP"
       }
-    }
+    },
+
+        {
+            "id": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
+            "criteria": {
+                "SeriesDescription": "dMRI_dir30_AP"
+            }
+        },
+
+        {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "custom_entities": "acq-dwi",
+            "criteria": {
+              "SeriesDescription": "dMRI_SpinEchoFieldMap_??"
+            },
+            "sidecar_changes": {
+              "intendedFor": ["dwi"]
+            }
+        }
   ]
 }
