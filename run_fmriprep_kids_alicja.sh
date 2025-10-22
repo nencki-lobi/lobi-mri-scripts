@@ -5,7 +5,7 @@ ml fmriprep
 echo "using: MNIPediatricAsym:cohort-2 which is adequate for 4.5 - 8.5 y/o"
 #res-1 is 1mm
 
-echo "using: bids filter for task Alicja + fmaps"
+echo "using: bids filter for task Alicja + fmaps without run-xx label"
 #https://fmriprep.org/en/25.1.3/faq.html#how-do-i-select-only-certain-files-to-be-input-to-fmriprep
 script_dir="$(dirname "${BASH_SOURCE[0]}")"
 

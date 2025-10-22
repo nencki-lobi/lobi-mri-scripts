@@ -1,0 +1,29 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "anat_t1w"
+      }
+    },
+    {
+      "id": "fmri",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-*"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["fmri"]
+      }
+    }
+  ]
+}

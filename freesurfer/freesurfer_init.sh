@@ -1,11 +1,10 @@
 #!/bin/bash
 
+SUBJECTS_DIR="$1"
 if [ $# -lt 1 ]; then
-  echo "Provide SUBECTS_DIR as argument eg. $0 ./bids-dir/derivatives/freesurfer"
-  exit 1
+    SUBJECTS_DIR="$(pwd)"
 fi
 
-SUBJECTS_DIR="$1"
 mkdir -p "$SUBJECTS_DIR"
 
 export FS_LICENSE=/home/jovyan/shared_storage/freesurfer.txt
@@ -29,5 +28,5 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     alias fst1='freeview -v mri/T1.mgz'
     alias fsaparc='freeview -v mri/orig.mgz mri/aparc+aseg.mgz:colormap=lut:opacity=0.4 -f surf/lh.white:annot=aparc.annot'
 else
-	echo "Now You can load freesurfer eg. ml freesurfer/8.1.0"
+	echo "Now You can load freesurfer eg. ml freesurfer"
 fi
