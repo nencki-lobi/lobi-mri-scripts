@@ -133,21 +133,42 @@
         {
             "id": "dwi",
             "datatype": "dwi",
+            "custom_entities": "dir-AP",
             "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "dMRI_dir30_AP"
+            }
+        },
+        {
+            "id": "dwi2",
+            "datatype": "dwi",
+            "custom_entities": "dir-PA",
+            "suffix": "dwi",
+            "criteria": {
+                "SeriesDescription": "dMRI_b0_PA"
             }
         },
 
         {
             "datatype": "fmap",
             "suffix": "epi",
-            "custom_entities": "acq-dwi",
+            "custom_entities": "acq-dwi_dir-AP",
             "criteria": {
-              "SeriesDescription": "dMRI_SpinEchoFieldMap_??"
+              "SeriesDescription": "dMRI_SpinEchoFieldMap_AP"
             },
             "sidecar_changes": {
-              "intendedFor": ["dwi"]
+              "intendedFor": ["dwi","dwi2"]
+            }
+        },
+              {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "custom_entities": "acq-dwi_dir-PA",
+            "criteria": {
+              "SeriesDescription": "dMRI_SpinEchoFieldMap_PA"
+            },
+            "sidecar_changes": {
+              "intendedFor": ["dwi","dwi2"]
             }
         }
   ]
