@@ -4,7 +4,11 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-#export SINGULARITYENV_PYTHONPATH=~/lobi-mri-scripts/mriqc-override
+export SINGULARITYENV_PYTHONPATH=~/lobi-mri-scripts/mriqc-override
+if [ -n "$SINGULARITYENV_PYTHONPATH" ]; then
+    echo "Using modified mriqc pipeline! BE CAREFUL!"
+fi
+
 ml mriqc
 
 bids_dir=$(realpath "$2")
