@@ -1,0 +1,12 @@
+{
+    "bold": {
+        "datatype": "func",
+        "session": "01",
+        "suffix": "bold",
+        "task": ["alicja1", "alicja2"]
+    },
+    "fmap": {
+        "datatype": "fmap",
+        "run": null
+    }
+}

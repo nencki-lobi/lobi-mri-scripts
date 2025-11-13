@@ -1,15 +1,11 @@
 #!/bin/bash
-#usage: ./run_mriqc.sh <sub-XX> <bids_dir> <bids-dir/derivatives/mriqc>
-ml mriqc
-
-script_dir="$(dirname "${BASH_SOURCE[0]}")"
-
-mriqc_ver=mriqc
-#mriqc_ver=$script_dir/mriqc/mriqc-wrapper
-
-if [ "$mriqc_ver" = "$script_dir/mriqc/mriqc-wrapper" ]; then
-	echo "using: mriqc mod to force fber calculation"
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <sub-XX> <bids_dir> <bids-dir/derivatives/mriqc>"
+    exit 1
 fi
+
+#export SINGULARITYENV_PYTHONPATH=~/lobi-mri-scripts/mriqc-override
+ml mriqc
 
 bids_dir=$(realpath "$2")
 output_dir=$(realpath "$3")
@@ -21,7 +17,7 @@ nthreads=10
 mem=20 #gb
 
 echo $work
-echo $mriqc_ver \
+mriqc \
     $bids_dir \
     $output_dir \
     participant \
