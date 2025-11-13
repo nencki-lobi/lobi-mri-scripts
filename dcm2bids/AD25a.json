@@ -1,0 +1,66 @@
+{
+  "descriptions": [
+    {
+      "datatype": "anat",
+      "suffix": "T1w",
+      "criteria": {
+        "SeriesDescription": "t1_mprage*"
+      }
+    },
+    {
+      "datatype": "anat",
+      "suffix": "T2w",
+      "criteria": {
+        "SeriesDescription": "t2_space*"
+      }
+    },
+    {
+      "id": "fmri",
+      "datatype": "func",
+      "suffix": "bold",
+      "criteria": {
+        "SeriesDescription": "task-*"
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap*"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["fmri"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "TB1TFL",
+      "custom_entities": "part-mag",
+      "criteria": {
+          "SeriesDescription": "rf_map",
+          "SequenceVariant": "SERVICE\\SP"
+      }
+    },
+        {
+            "id": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
+            "custom_entities": "dir-AP",
+            "criteria": {
+                "SeriesDescription": "ep2d_diff_biobank"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "custom_entities": "dir-PA_acq-dwi",
+            "criteria": {
+                "SeriesDescription": "ep2d_diff_biobank 3b0 PA"
+            },
+            "sidecar_changes": {
+                "intendedFor": ["dwi"]
+            }
+        }
+      
+  ]
+}
