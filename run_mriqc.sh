@@ -5,11 +5,11 @@ if [ "$#" -ne 3 ]; then
 fi
 
 script_dir="$(dirname "${BASH_SOURCE[0]}")"
-mriqc_ver=mriqc
-#mriqc_ver=$script_dir/mriqc/mriqc-wrapper
+#mriqc_ver=mriqc
+mriqc_ver=$script_dir/mriqc/mriqc-wrapper
 
 if [ "$mriqc_ver" = "$script_dir/mriqc/mriqc-wrapper" ]; then
-	echo "using: mriqc mod to force fber calculation"
+	echo "CAUTION: using modified mriqc pipeline"
 fi
 ml mriqc
 
@@ -23,7 +23,7 @@ nthreads=10
 mem=20 #gb
 
 echo $work
-mriqc \
+$mriqc_ver \
     $bids_dir \
     $output_dir \
     participant \
@@ -36,11 +36,11 @@ mriqc \
     --verbose-reports \
     --no-sub \
     -w $work/$subj \
-    --modalities bold
+    --modalities T1w
 
 rm -rf $work/$subj
 
 echo
 echo "Now You can run group level with:"
-echo "$mriqc_ver $bids_dir $output_dir group"
+echo "$mriqc_ver $bids_dir $output_dir group -w $work"
 
