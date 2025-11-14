@@ -3,3 +3,4 @@
 table_viewer/imgs/*.svg
 table_viewer/imgs/*.jpg
 *.pyc
+my_*
