@@ -4,11 +4,13 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-export SINGULARITYENV_PYTHONPATH=~/lobi-mri-scripts/mriqc-override
-if [ -n "$SINGULARITYENV_PYTHONPATH" ]; then
-    echo "Using modified mriqc pipeline! BE CAREFUL!"
-fi
+script_dir="$(dirname "${BASH_SOURCE[0]}")"
+mriqc_ver=mriqc
+#mriqc_ver=$script_dir/mriqc/mriqc-wrapper
 
+if [ "$mriqc_ver" = "$script_dir/mriqc/mriqc-wrapper" ]; then
+	echo "using: mriqc mod to force fber calculation"
+fi
 ml mriqc
 
 bids_dir=$(realpath "$2")
