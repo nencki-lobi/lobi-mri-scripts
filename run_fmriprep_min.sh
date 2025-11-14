@@ -1,5 +1,8 @@
 #!/bin/bash
-#usage: ./run_fmriprep.sh <sub-XX> <bids_dir>
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <sub-XX> <bids_dir>"
+    exit 1
+fi
 ml fmriprep
 
 root_dir=$(realpath "$2")

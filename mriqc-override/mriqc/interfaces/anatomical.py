@@ -407,7 +407,7 @@ class Harmonize(SimpleInterface):
     def _run_interface(self, runtime):
         in_file = nb.load(self.inputs.in_file)
         wm_mask = nb.load(self.inputs.wm_mask).get_fdata()
-        wm_mask[wm_mask < 0.9] = 0
+        wm_mask[wm_mask < 0.6] = 0 #lowered from 0.9 to comply with low SNR T2 by BK
         wm_mask[wm_mask > 0] = 1
         wm_mask = wm_mask.astype(np.uint8)
 

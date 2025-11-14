@@ -1,9 +1,13 @@
 #!/bin/bash
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 \"xnat_ses1 xnat_ses2...\" subject [session]"
+    exit 1
+fi
 
-# Run using GNU parallel. Be careful with numbering of columns in CSV
+#When run using GNU parallel, be careful with numbering of columns in CSV
 #tail -n +2 $subject_list | parallel -j 4 --colsep ',' run_dcm2bids.sh "{1}" {4} {5} 
 
-#no_auto - use only when task name is specified within the config file
+#no_auto - use only when ALL NEEDED INFORMATION (eg. task name) is specified within the config file
 
 SCRIPTS=$(dirname "$(realpath "$0")")
 
