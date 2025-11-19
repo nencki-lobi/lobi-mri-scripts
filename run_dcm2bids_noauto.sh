@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$#" -ne 2 ]; then
+if [[ $# -ne 2 && $# -ne 3 ]]; then
     echo "Usage: $0 \"xnat_ses1 xnat_ses2...\" subject [session]"
     exit 1
 fi
