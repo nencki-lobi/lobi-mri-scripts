@@ -6,6 +6,7 @@
         "task": ["alicja1", "alicja2"]
     },
     "fmap": {
+        "_comment": "fieldmaps with run-x label will be ignored",
         "datatype": "fmap",
         "run": null
     }
