@@ -7,6 +7,7 @@ ml fmriprep
 
 root_dir=$(realpath "$2")
 subj=${1##*-}
+output_dir=$root_dir/derivatives
 work=$(realpath ~/fmriprep)
 
 mkdir -p $work/$subj
@@ -17,7 +18,7 @@ mem=10000 #mb
 
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
 echo fmriprep $root_dir \
-         $root_dir/derivatives \
+         $output_dir \
          participant \
          --fs-license-file $root_dir/code/freesurfer.txt \
          --fs-no-reconall \
@@ -28,4 +29,20 @@ echo fmriprep $root_dir \
          --fd-spike-threshold 0.3 \
          -v
 
-rm -rf $work/$subj
+# ----- QC CHECK -----
+
+logfile="$root_dir/derivatives/fmriprep.log"
+
+if find "$output_dir/$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
+    if ! find "$root_dir/sub-$subj" -type d -name fmap | grep -q .; then
+        echo "$(date) sub-$subj : BOLD present but fmap missing" >> "$logfile"
+    else
+        echo "$(date) sub-$subj : Preproc finished" >> "$logfile"
+        rm -rf $work/$subj
+    fi
+
+else
+    echo "$(date) sub-$subj : Preproc failed (no desc-preproc_bold found)" >> "$logfile"
+fi
+
+
