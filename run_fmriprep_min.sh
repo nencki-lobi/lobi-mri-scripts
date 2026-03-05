@@ -33,7 +33,7 @@ echo fmriprep $root_dir \
 
 logfile="$root_dir/derivatives/fmriprep.log"
 
-if find "$output_dir/$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
+if find "$output_dir/sub-$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
     if ! find "$root_dir/sub-$subj" -type d -name fmap | grep -q .; then
         echo "$(date) sub-$subj : BOLD present but fmap missing" >> "$logfile"
     else
