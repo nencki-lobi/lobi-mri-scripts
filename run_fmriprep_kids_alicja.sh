@@ -27,7 +27,7 @@ fmriprep $root_dir \
          --fs-license-file ~/shared_storage/freesurfer.txt \
          --fs-no-reconall \
          --participant-label $subj \
-         --bids-filter-file $scipt_dir/fmriprep/bids_filter_alicja_with_fieldmaps.json \
+         --bids-filter-file $script_dir/fmriprep/bids_filter_alicja_with_fieldmap.json \
          --nprocs $nprocs --mem_mb $mem \
          --skip_bids_validation \
          -w $work/$subj \
@@ -40,7 +40,10 @@ fmriprep $root_dir \
 
 logfile="$output_dir/fmriprep.log"
 
-if find "$output_dir/sub-$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
+if [ ! -d "$output_dir/sub-$subj" ]; then
+    echo "$(date) sub-$subj : Preproc failed (output folder missing)" >> "$logfile"
+
+elif find "$output_dir/sub-$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
     if ! find "$root_dir/sub-$subj" -type d -name fmap | grep -q .; then
         echo "$(date) sub-$subj : BOLD present but fmap missing" >> "$logfile"
     else
