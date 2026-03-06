@@ -36,7 +36,7 @@ $mriqc_ver \
     --verbose-reports \
     --no-sub \
     -w $work/$subj \
-    --modalities bold
+    --modalities T1w T2w bold
 
 rm -rf $work/$subj
 

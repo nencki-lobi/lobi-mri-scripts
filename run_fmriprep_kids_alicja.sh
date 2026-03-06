@@ -21,13 +21,13 @@ nprocs=6
 mem=10000 #mb
 
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
-echo fmriprep $root_dir \
+fmriprep $root_dir \
          $output_dir \
          participant \
-         --fs-license-file ~/freesurfer.txt \
+         --fs-license-file ~/shared_storage/freesurfer.txt \
          --fs-no-reconall \
          --participant-label $subj \
-         --bids-filter-file $scipt_dir/fmriprep/bids_filter_alicja.json \
+         --bids-filter-file $scipt_dir/fmriprep/bids_filter_alicja_with_fieldmaps.json \
          --nprocs $nprocs --mem_mb $mem \
          --skip_bids_validation \
          -w $work/$subj \

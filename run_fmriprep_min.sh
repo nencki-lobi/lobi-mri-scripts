@@ -20,7 +20,7 @@ export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
 echo fmriprep $root_dir \
          $output_dir \
          participant \
-         --fs-license-file $root_dir/code/freesurfer.txt \
+         --fs-license-file ~/shared_storage/freesurfer.txt \
          --fs-no-reconall \
          --participant-label $subj \
          --nprocs $nprocs --mem_mb $mem \
