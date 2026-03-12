@@ -107,8 +107,9 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
+      "custom_entities": "acq-std_dir-AP",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap*",
+        "SeriesDescription": "SpinEchoFieldMap_AP",
         "BaseResolution": 64
       },
       "sidecar_changes": {
@@ -118,9 +119,33 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "custom_entities": "acq-hcp",
+      "custom_entities": "acq-std_dir-PA",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap*",
+        "SeriesDescription": "SpinEchoFieldMap_PA",
+        "BaseResolution": 64
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_task-fmri_run-01" , "id_task-fmri_run-02" , "id_task2-fmri_run-01" , "id_task2-fmri_run-02", "id_fastloc_run-01", "id_fastloc_run-02"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp_dir-AP",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_AP*",
+        "BaseResolution": 104
+      },
+      "sidecar_changes": {
+        "intendedFor": ["id_rest"]
+      }
+    },
+        {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "acq-hcp_dir-PA",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_PA*",
         "BaseResolution": 104
       },
       "sidecar_changes": {
