@@ -36,53 +36,55 @@
       "id": "id_task-fmri_run-01",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-orto1",
       "criteria": {
         "SeriesDescription": "task-fmri_run-01"
       },
       "sidecar_changes": {
-        "TaskName": "task1"
+        "TaskName": "orto"
       }
     },
     {
       "id": "id_task-fmri_run-02",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-orto2",
       "criteria": {
         "SeriesDescription": "task-fmri_run-02"
       },
       "sidecar_changes": {
-        "TaskName": "task1"
+        "TaskName": "orto"
       }
     },
     {
       "id": "id_task2-fmri_run-01",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri2",
+      "custom_entities": "task-orto1",
       "criteria": {
-        "SeriesDescription": "task2-fmri_run-01"
+        "SeriesDescription": "task-orto_run-01"
       },
       "sidecar_changes": {
-        "TaskName": "task2"
+        "TaskName": "orto"
       }
     },
     {
       "id": "id_task2-fmri_run-02",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fmri2",
+      "custom_entities": "task-orto2",
       "criteria": {
-        "SeriesDescription": "task2-fmri_run-02"
+        "SeriesDescription": "task-orto_run-02"
       },
       "sidecar_changes": {
-        "TaskName": "task2"
+        "TaskName": "orto"
       }
     },
     {
       "id": "id_fastloc_run-01",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fastloc",
+      "custom_entities": "task-fastloc1",
       "criteria": {
         "SeriesDescription": "task-fastloc_run-01"
       },
@@ -94,7 +96,7 @@
       "id": "id_fastloc_run-02",
       "datatype": "func",
       "suffix": "bold",
-      "custom_entities": "task-fastloc",
+      "custom_entities": "task-fastloc2",
       "criteria": {
         "SeriesDescription": "task-fastloc_run-02"
       },
