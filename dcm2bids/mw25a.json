@@ -13,6 +13,7 @@
     {
       "id": "id_rest",
       "datatype": "func",
+      "custom_entities": "task-rest",
       "suffix": "bold",
       "criteria": {
         "SeriesDescription": "task-rest_acq-hcp"
@@ -24,6 +25,7 @@
     {
       "id": "id_rest_sbref",
       "datatype": "func",
+      "custom_entities": "task-rest",
       "suffix": "sbref",
       "criteria": {
         "SeriesDescription": "task-rest_acq-hcp_SBRef"
