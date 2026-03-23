@@ -1,9 +1,10 @@
-
 ## 🧠 LOBI Scripts for MRI Data Processing
 
-**[Quickstart.ipynb](./quickstart.ipynb)** demonstrates how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository.
+This repository contains custom `dcm2bids` configuration files for our projects and run scripts for common MRI processing tasks such as MRIQC, fMRIPrep, and FreeSurfer setup.
 
-Specifically, you will find the following resources here:
+For guidance on using the Neurodesk platform, see **[quickstart.ipynb](./quickstart.ipynb)** and **[FAQ.md](./FAQ.md)**. The quickstart notebook shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
+
+Specifically, this repository provides the following resources:
 
 
 ### 📁 dcm2bids configs
@@ -13,9 +14,6 @@ Custom configuration files for our projects:
 
 
 ### ⚙️ Available run scripts
-
-* **[`freesurfer_init.sh subjects_dir`](./freesurfer_init.sh)**
-  Initializes environment variables and Freeview aliases.
 
 * **[`run_mriqc.sh subject bids_dir`](./run_mriqc.sh)**
   Runs **MRIQC** with custom resource settings and working directory.
@@ -29,6 +27,9 @@ Custom configuration files for our projects:
 
   * cohort-specific atlas from **TemplateFlow**,
   * **BIDS filtering** to include only specific task names and selected fieldmaps **without the `run-xx` label** (note: fMRIPrep will not report missing fieldmaps but gives an error when there are multiple ones available).
+
+* **[`freesurfer/freesurfer_init.sh subjects_dir`](./freesurfer/freesurfer_init.sh)**
+  Initializes environment variables and Freeview aliases.
 
 * **[`run_dcm2bids_noauto.sh xnat_id subject [session]`](./run_dcm2bids_noauto.sh)**
   ⚠️ **Deprecated:** this script has been replaced by the
@@ -44,6 +45,5 @@ Custom configuration files for our projects:
 When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module,
 you can call these scripts conveniently via the `lobi_script` command:
 `lobi_script run_mriqc.sh sub-xx ./derivatives/mriqc` or `lobi_script ls
-` to list all available scripts.
-
+` to list scripts in the main directory.
 

@@ -1,4 +1,5 @@
 .DS_Store
+.venv
 .ipynb_checkpoints/
 table_viewer/imgs/*.svg
 table_viewer/imgs/*.jpg
