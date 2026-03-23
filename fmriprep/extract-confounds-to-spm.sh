@@ -14,7 +14,7 @@ HEADER=$(head -n1 "$INFILE" | tr '\t' '\n' | nl -w1 -s:)
 
 # select motion columns by name
 COLS=$(echo "$HEADER" \
-    | grep -E ':(trans_x|trans_y|trans_z|rot_x|rot_y|rot_z)$' \
+    | grep -E ':(trans_x|trans_y|trans_z|rot_x|rot_y|rot_z|motion_outlier*)$' \
     | cut -d: -f1 \
     | paste -sd, -)
 
