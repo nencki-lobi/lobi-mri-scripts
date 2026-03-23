@@ -19,6 +19,9 @@ COLS=$(echo "$HEADER" \
     | paste -sd, -)
 
 # cut columns and remove header
-cut -f"$COLS" "$INFILE" | tail -n +2 > "$OUTFILE"
+cut -f"$COLS" "$INFILE" \
+  | tail -n +2 \
+  | sed 's/\<n\/a\>/0/g' \
+  > "$OUTFILE"
 
 echo "Saved to $OUTFILE"
