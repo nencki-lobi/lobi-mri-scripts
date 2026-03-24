@@ -17,7 +17,7 @@ nprocs=6
 mem=10000 #mb
 
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
-echo fmriprep $root_dir \
+fmriprep $root_dir \
          $output_dir \
          participant \
          --fs-license-file ~/shared_storage/freesurfer.txt \
