@@ -1,13 +1,13 @@
 #!/bin/bash
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <sub-XX> <bids_dir>"
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <sub-XX> <bids_dir> <bids_dir/derivatives/fmriprep>"
     exit 1
 fi
 ml fmriprep
 
 root_dir=$(realpath "$2")
 subj=${1##*-}
-output_dir=$root_dir/derivatives
+output_dir=$(realpath "$3")
 work=$(realpath ~/fmriprep)
 
 mkdir -p $work/$subj
