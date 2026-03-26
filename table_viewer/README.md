@@ -5,14 +5,14 @@ This tool allows you to load a CSV table and explore it in your web browser. It 
 **Run with:**
 `python -m http.server --cgi`
 then go to:
-`http://localhost:8000` and find 'table-viewer' directory
+`http://localhost:8000/` and find 'table-viewer' directory
 
 ## Hints
 
-* Use the **Save** button to persist your changes. **Changes are not saved automatically.**
+* Use the **Save** button to download Your CSV table and scores.
 * You can enter your own command executed for each table row, e.g.:
   `freeview -v $SUBJECTS_DIR/$subj/mri/T1w.mgz`
-  Use `$subj` to insert subject labels. **It will work only if You use local http server and software installed on the same computer**
+  Use `$subj` to insert subject labels. **It will work only if You use local http server and software installed on the same computer**. Also `--cgi` flag is required.
 * Rows labeled **"low"** and **"high"** define lower and upper thresholds. Values outside these bounds are highlighted in yellow.
 * Images named exactly like the index column (`{subj}.svg`) will be loaded automatically from `./imgs` if present.
   You can change the default image type (SVG) in the first line of `script.css`.
@@ -28,7 +28,6 @@ Assuming you start in mriqc directory and table_viewer is located within it:
 cd ./mriqc
 cp -r ~/lobi-mri-scripts/table_viewer ./table_viewer
 ```
----
 
 ### **1. Prepare `data.csv` for the Table Viewer**
 
@@ -51,9 +50,11 @@ awk -F'\t' 'NR==1 {for(i=1; i<=NF; i++) print i". " $i}' group_T1w.tsv
 ```bash
 tail -n1 table_viewer/data.csv | sed 's/[^,]//g' | awk '{print "low"$0; print "high"$0}' >> table_viewer/data.csv
 ```
-* Set those threshold values for each column
-
----
+* Edit the `low` and `high` rows to set threshold values for each column eg.
+```
+low,,,15,
+high,20,,,
+```
 
 ### **2. Open the Table Viewer in your browser**
 
@@ -64,10 +65,8 @@ http://localhost:8000/table_viewer/
 ```
 
 The viewer will automatically load:
-
 * `data.csv`
 * Images from `table_viewer/imgs` (if present)
-* Configuration defined in the viewer directory
 
 ---
 
