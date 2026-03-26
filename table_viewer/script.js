@@ -1,10 +1,12 @@
 const imageExtension = 'svg';
 const linkPrefix = '..'; // images will be hyperlinked with this prefix and subject ID (default: ../)
+const autosaveKey = `table-viewer-ratings:${window.location.pathname}`;
 
 document.addEventListener('DOMContentLoaded', () => {
     let originalData; // Variable to store the original data
     const table = document.getElementById('csv-table');
     const commandField = document.getElementById('command-field');
+    const savedRatings = loadSavedRatings();
 
 
 // Fetch data from the server
@@ -21,10 +23,10 @@ fetch('data.csv')
             const subjId = columns[0].trim();
 
             if (subjId === 'low') {
-                lowerBounds = columns.slice(1).map(Number);
+                lowerBounds = columns.slice(1).map(value => value.trim() === '' ? null : Number(value));
             } 
             if (subjId === 'high') {
-                upperBounds = columns.slice(1).map(Number);
+                upperBounds = columns.slice(1).map(value => value.trim() === '' ? null : Number(value));
             }
         });
 
@@ -46,9 +48,9 @@ fetch('data.csv')
                 
                 const cellValue = parseFloat(column.trim());
                 if (!isNaN(cellValue) && lowerBounds && upperBounds) {
-                    if (cellValue < lowerBounds[colIndex - 1]) {
+                    if (lowerBounds[colIndex - 1] !== null && cellValue < lowerBounds[colIndex - 1]) {
                         td.style.backgroundColor = 'yellow'; // Cell value is lower than the lower bound
-                    } else if (cellValue > upperBounds[colIndex - 1]) {
+                    } else if (upperBounds[colIndex - 1] !== null && cellValue > upperBounds[colIndex - 1]) {
                         td.style.backgroundColor = 'yellow'; // Cell value is higher than the lower bound
                     }
                 }
@@ -70,6 +72,11 @@ fetch('data.csv')
 			            selectForm.appendChild(optionElement);
 			        });
 
+			        if (savedRatings[subjId] && options.includes(savedRatings[subjId])) {
+			            selectForm.value = savedRatings[subjId];
+			            columns[colIndex] = savedRatings[subjId];
+			        }
+
 			        td.appendChild(selectForm);
 
 					selectForm.addEventListener('change', function () {
@@ -77,6 +84,7 @@ fetch('data.csv')
 					    if (selectedValue !== columns[colIndex]) {
 					        tr.style.backgroundColor = selectedValue === 'bad' || selectedValue === 'rerun' ? 'red' : '';
 					        columns[colIndex] = selectedValue;
+					        saveRating(subjId, selectedValue);
 					    }
 					});
 			    }
@@ -110,10 +118,33 @@ fetch('data.csv')
             commandTd.appendChild(commandButton);
             tr.appendChild(commandTd);
 
+            const currentRating = columns[columns.length - 1];
+            tr.style.backgroundColor = currentRating === 'bad' || currentRating === 'rerun' ? 'red' : '';
+
             table.appendChild(tr);
         });
     })
     .catch(error => console.error('Error:', error));
+
+    function loadSavedRatings() {
+        try {
+            const raw = window.localStorage.getItem(autosaveKey);
+            return raw ? JSON.parse(raw) : {};
+        } catch (error) {
+            console.error('Could not load autosaved ratings:', error);
+            return {};
+        }
+    }
+
+    function saveRating(subjId, rating) {
+        savedRatings[subjId] = rating;
+
+        try {
+            window.localStorage.setItem(autosaveKey, JSON.stringify(savedRatings));
+        } catch (error) {
+            console.error('Could not autosave rating:', error);
+        }
+    }
 
     function executeCommand(command) {
         var xhr = new XMLHttpRequest();
