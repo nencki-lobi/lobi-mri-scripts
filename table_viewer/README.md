@@ -20,42 +20,38 @@ then go to:
 
 ---
 
-## Example Workflow for **T1w MRIQC** Analysis
+## Example Workflow for **MRIQC** Analysis
 
-Assuming you start in:
+Assuming you start in mriqc directory and table_viewer is located within it:
 
 ```bash
 cd ./mriqc
-python -m http.server --cgi
+cp -r ~/lobi-mri-scripts/table_viewer ./table_viewer
 ```
-
-Your Table Viewer directory is located at:
-
-```
-./mriqc/table_viewer
-```
-
 ---
 
 ### **1. Prepare `data.csv` for the Table Viewer**
 
-Check available columns and their indices:
+Export selected columns to a new CSV file inside **table_viewer** (select one of the following commands):
 
+```bash
+awk -F'\t' '{print $1","$2","$3","$5","$6","$13","}' group_T1w.tsv > table_viewer/data.csv
+
+awk -F'\t' '{print $1","$23","$12","$45","}' group_bold.tsv > table_viewer/data.csv
+```
+
+If you want to select other columns You can identify their numbers by running:
 ```bash
 awk -F'\t' 'NR==1 {for(i=1; i<=NF; i++) print i". " $i}' group_T1w.tsv
 ```
 
-Export selected columns to a new CSV file inside **table_viewer**:
-
-```bash
-cut -f 1,2,3,5,6,13 group_T1w.tsv | tr '\t' ',' > table_viewer/data.csv
-```
-
 (Optional) Add lower and upper bounds for cell coloring:
 
-* Edit `table_viewer/data.csv`
-* Add **two additional rows** named `low` and `high`
-* Set threshold values for each column
+* Add **two additional rows** named `low` and `high`. Below is a command to do it at the end of the file:
+```bash
+tail -n1 table_viewer/data.csv | sed 's/[^,]//g' | awk '{print "low"$0; print "upper"$0}' >> table_viewer/data.csv
+```
+* Set those threshold values for each column
 
 ---
 

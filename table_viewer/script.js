@@ -1,5 +1,5 @@
 const imageExtension = 'svg';
-const link = '/'; // images will be hyperlinked with "/" or different server such as http://localhost:8001/
+const linkPrefix = '..'; // images will be hyperlinked with this prefix and subject ID (default: ../)
 
 document.addEventListener('DOMContentLoaded', () => {
     let originalData; // Variable to store the original data
@@ -88,7 +88,7 @@ fetch('data.csv')
             container.classList.add('image-container');
 
             const link = document.createElement('a');
-            link.href = `${link}/${subjId}.html`;
+            link.href = `${linkPrefix}/${subjId}.html`;
             link.target = '_blank';
 	
             const img = document.createElement('img');
