@@ -14,6 +14,7 @@ subj=${1##*-}
 work=$(realpath ~/fmriprep)
 
 mkdir -p $work/$subj
+mkdir -p ~/freesurfer-subjects-dir #if not exists will give error
 
 nprocs=6
 mem=10000 #mb
@@ -33,4 +34,21 @@ fmriprep $root_dir \
          --output-spaces MNIPediatricAsym:cohort-2:res-2 \
          -v
 
-rm -rf $work/$subj
+# ----- QC CHECK -----
+
+logfile="$output_dir/fmriprep.log"
+
+if [ ! -d "$output_dir/sub-$subj" ]; then
+    echo "$(date) sub-$subj : Preproc failed (output folder missing)" >> "$logfile"
+
+elif find "$output_dir/sub-$subj" -type f -name "*desc-preproc_bold.nii.gz" -print -quit | grep -q .; then
+    if ! find "$root_dir/sub-$subj" -type d -name fmap | grep -q .; then
+        echo "$(date) sub-$subj : BOLD present but fmap missing" >> "$logfile"
+    else
+        echo "$(date) sub-$subj : Preproc finished" >> "$logfile"
+        rm -rf $work/$subj
+    fi
+
+else
+    echo "$(date) sub-$subj : Preproc failed (no desc-preproc_bold found)" >> "$logfile"
+fi
