@@ -49,7 +49,7 @@ awk -F'\t' 'NR==1 {for(i=1; i<=NF; i++) print i". " $i}' group_T1w.tsv
 
 * Add **two additional rows** named `low` and `high`. Below is a command to do it at the end of the file:
 ```bash
-tail -n1 table_viewer/data.csv | sed 's/[^,]//g' | awk '{print "low"$0; print "upper"$0}' >> table_viewer/data.csv
+tail -n1 table_viewer/data.csv | sed 's/[^,]//g' | awk '{print "low"$0; print "high"$0}' >> table_viewer/data.csv
 ```
 * Set those threshold values for each column
 
@@ -73,11 +73,13 @@ The viewer will automatically load:
 
 ### Optional: Add Thumbnail Images
 
-You may add thumbnails using **either** symbolic links or PNG conversion.
+You may add thumbnails using **either** symbolic links or PNG conversion. Run below commands inside `./mriqc/table_viewer/imgs`:
+```
+cd ./mriqc/table_viewer/imgs
+```
 
-#### **Option A: Symlinks (recommended)**
 
-Run this inside `./mriqc/table_viewer/imgs`:
+#### **Option A: Symlinks (quick and easy)**
 
 ```bash
 desc=desc-zoomed
@@ -90,27 +92,21 @@ for z in ../../sub-*/figures/*${desc}_${modality}.svg; do
 done
 ```
 
-#### **Option B: Convert SVG to PNG**
+#### **Option B: Convert SVG to PNG for faster loading**
 
 ```bash
-sudo apt-get install librsvg2-bin
-```
+sudo apt install librsvg2-bin
 
-Run inside `./mriqc/table_viewer`:
-
-```bash
 desc=desc-zoomed
 modality=T1w
 
-mkdir -p ./imgs_png
-
-for z in ../sub-*/figures/*${desc}_${modality}.svg; do
+for z in ../../sub-*/figures/*${desc}_${modality}.svg; do
   filename=$(basename "$z")
   out_name=$(echo "$filename" | sed "s/${desc}_//")
   out_name_png="${out_name%.svg}.png"
 
-  echo "Converting: $z → imgs_png/$out_name_png"
-  rsvg-convert -w 600 -f png "$z" -o "./imgs_png/$out_name_png"
+  echo "Converting: $z → $out_name_png"
+  rsvg-convert -w 600 -f png "$z" -o "$out_name_png"
 done
 ```
 
