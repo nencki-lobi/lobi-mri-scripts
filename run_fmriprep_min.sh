@@ -26,7 +26,7 @@ fmriprep $root_dir \
          --nprocs $nprocs --mem_mb $mem \
          --skip_bids_validation \
          -w $work/$subj \
-         --fd-spike-threshold 0.3 \
+         --fd-spike-threshold 0.5 \
          -v
 
 # ----- QC CHECK -----
