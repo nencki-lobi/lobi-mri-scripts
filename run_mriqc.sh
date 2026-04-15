@@ -28,7 +28,7 @@ $mriqc_ver \
     $output_dir \
     participant \
     --participant-label ${subj} \
-    --fd_thres 0.3 \
+    --fd_thres 0.5 \
     --n_proc $nthreads \
     --mem_gb $mem \
     --float32 \
