@@ -86,14 +86,22 @@
               "intendedFor": ["dwi_98", "dwi_99"]
             }
         },
-
+        {
+            "datatype": "fmap",
+            "suffix": "TB1TFL",
+            "custom_entities": "part-mag",
+            "criteria": {
+                "SeriesDescription": "rf_map",
+                "SequenceVariant": "SERVICE\\SP"
+            }
+        },
         {
             "datatype": "anat",
             "suffix": "SWI",
             "custom_entities": "part-mag",
             "criteria": {
                 "SeriesDescription": "t2_fl3d_tra_p2_swi",
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
@@ -113,7 +121,7 @@
             "criteria": {
                 "SeriesDescription": "qsm 5TEs",
                 "EchoNumber": 1,
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
@@ -133,7 +141,7 @@
             "criteria": {
                 "SeriesDescription": "qsm 5TEs",
                 "EchoNumber": 2,
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
@@ -153,7 +161,7 @@
             "criteria": {
                 "SeriesDescription": "qsm 5TEs",
                 "EchoNumber": 3,
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
@@ -173,7 +181,7 @@
             "criteria": {
                 "SeriesDescription": "qsm 5TEs",
                 "EchoNumber": 4,
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
@@ -193,7 +201,7 @@
             "criteria": {
                 "SeriesDescription": "qsm 5TEs",
                 "EchoNumber": 5,
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
             }
         },
         {
