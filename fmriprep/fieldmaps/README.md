@@ -1,88 +1,169 @@
-# Co robić kiedy mam >1 Fieldmap?
+# Fieldmaps
 
-**fmriprep nie użyje żadnego fieldmapa**, jeśli będzie ich więcej niż potrzeba. Musisz to wyjaśnić zanim uruchomisz preprocessing. Najprostszy algorytm "wybierz drugi" polega na utworzeniu skrótu `ln -s` do fieldmapa z etykietą `run-02`, z założeniem, że drugi jest lepszy niż żaden. Poniżej znajduje się kod umożliwiający wykonanie linków w pętli dla wszystkich badań.
+Zestaw skryptów do pracy z fieldmaps w BIDS i przygotowania ich pod `fmriprep`.
 
-Pamiętaj, że przy uruchomieniu `fmriprep` musisz użyć filtra, który zignoruje wszystkie niepotrzebne fieldmapy, czyli odrzuci te z etykietą `run-XX`.
+## Przegląd
 
-```bash
-for s in sub*; do
-  for dir in AP PA; do
-    for ext in json nii.gz; do
-      cd "$s/ses-01/fmap" || continue
-      src="${s}_ses-01_acq-std_dir-${dir}_run-02_epi.${ext}"
-      dst="${s}_ses-01_acq-std_dir-${dir}_epi.${ext}"
-      [ -e "$src" ] && ln -sf "$src" "$dst"
-      cd - > /dev/null
-    done
-  done
-done
-```
+W repozytorium są cztery powiązane kroki robocze:
 
-Przykładowy `bids filter`:
+1. `analysis_01_fmap_match.sh` sprawdza dopasowanie fieldmap dla pojedynczego pliku `func` i zwraca ścieżkę, jeśli dopasowanie wygląda źle.
+2. `analysis_02_better_fmap_match.sh` czyta wynik z kroku 1, czyli `mismatch.txt`, i szuka lepszego dopasowania `AP` oraz `PA`.
+3. `analysis_03_preflight_fieldmap_check.py` robi preflight pojedynczego skanu `func.nii.gz` i weryfikuje, czy wybrane fieldmapy mają poprawne metadane.
+4. `topup-all.sh` buduje jedną wspólną mapę pola z wszystkich dostępnych skanów `fmap` dla danej sesji.
 
-```json
-{
-  "fmap": {
-    "datatype": "fmap",
-    "run": null
-  }
-}
-```
+Skrypt [`fieldmap_check.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/fieldmap_check.sh) pokazuje typowy przebieg 1, 2 i 3 na jednej sesji.
 
-# Fieldmap Check
+## Skrypty
 
-Dla osób, które mają więcej niż jeden fieldmap, domyślnie przypisujemy fieldmapy `run-02`. Sprawdzamy, czy takie przypisanie ma sens.
+- [`analysis_01_fmap_match.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/analysis_01_fmap_match.sh) - przyjmuje jeden plik JSON z `func`, znajduje odpowiadający mu katalog `fmap` w tej samej sesji, porównuje `ImageOrientationPatientDICOM` i `ShimSetting` z domyślną parą `AP`/`PA` bez numeru `run` i wypisuje ścieżkę skanu, jeśli dopasowanie jest podejrzane.
+- [`analysis_02_better_fmap_match.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/analysis_02_better_fmap_match.sh) - przyjmuje listę z `mismatch.txt`, przeszukuje wszystkie dostępne JSON-y fieldmap w danej sesji i zwraca `better_match.tsv` z propozycją lepszego `AP` i `PA`.
+- [`analysis_03_preflight_fieldmap_check.py`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/analysis_03_preflight_fieldmap_check.py) - przyjmuje pojedynczy plik `func.nii.gz`, znajduje siostrzany katalog `fmap`, sprawdza `IntendedFor`, a opcjonalnie także `ShimSetting` i orientację.
+- [`fieldmap_check.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/fieldmap_check.sh) - pokazuje kompletny przykład uruchomienia 1, 2 i 3 w jednej sesji.
+- [`topup-all.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/topup-all.sh) - scala wszystkie dostępne skany `fmap`, uruchamia `topup` i przygotowuje pliki wyjściowe pod `fmriprep`.
 
-## Co jest sprawdzane
+## Wspólny wzorzec wejścia
 
-Pierwszy etap tworzy listę `mismatch.txt`.
+Skrypty 1 i 3 pracują na pojedynczym skanie i z samej ścieżki wejściowej wyciągają `sub-*` oraz `ses-*`, żeby przejść do `ses-*/fmap`.
 
-Skrypt [analysis_01_alicja_fmap_match.sh](/home/jovyan/PROJEKTY/fmaps/ses-01/analysis_01_alicja_fmap_match.sh:1):
+- `analysis_01_fmap_match.sh` bierze `func` w formie JSON.
+- `analysis_03_preflight_fieldmap_check.py` bierze `func.nii.gz`, a odpowiadający JSON sidecar odczytuje sam.
 
-- przyjmuje jeden plik fMRI jako argument,
-- znajduje odpowiadający mu katalog `fmap` w tym samym `sub-*/ses-*`,
-- porównuje skan z fieldmapami bez etykiety run: `sub-*_ses-*_acq-std_dir-AP_epi.json` oraz `sub-*_ses-*_acq-std_dir-PA_epi.json`,
-- sprawdza dwa kryteria: `ImageOrientationPatientDICOM` oraz `ShimSetting`,
-- jeśli przypisane fieldmapy nie spełniają tych warunków, wypisuje pełną ścieżkę skanu na `stdout`
+To oznacza, że dla obu skryptów najważniejsza jest ścieżka do skanu, a nie ręczne podawanie katalogu `fmap`.
 
-W praktyce `mismatch.txt` zawiera skany, dla których domyślny link do `run-02` nie wygląda na poprawny.
+## 1. Sprawdzenie dopasowania fieldmap
 
-## Jak szukane są lepsze dopasowania
+Ten etap służy do wykrycia przypadków, w których domyślne przypisanie fieldmapa nie wygląda poprawnie.
 
-Drugi etap czyta `mismatch.txt` i zapisuje `better_match.tsv`.
+### `analysis_01_fmap_match.sh`
 
-Skrypt [analysis_02_better_fmap_match.sh](/home/jovyan/PROJEKTY/fmaps/ses-01/analysis_02_better_fmap_match.sh:1):
+Wejście:
 
-- bierze każdy skan z `mismatch.txt`,
-- przechodzi do odpowiadającego mu katalogu `../fmap` względem danego `func`, czyli do `sub-*/ses-*/fmap`,
-- przeszukuje dostępne fieldmapy `*_dir-AP*_epi.json` i `*_dir-PA*_epi.json`,
-- zapisuje osobno najlepszy match `AP` i `PA`,
-- uznaje match tylko wtedy, gdy jednocześnie zgadzają się `ImageOrientationPatientDICOM` i `ShimSetting`
+- jeden plik `func` w postaci JSON, np. `sub-001_ses-01_task-..._bold.json`.
 
-Plik `better_match.tsv` ma trzy kolumny:
+Logika:
 
-- kolumna 1: ścieżka do fMRI
-- kolumna 2: najlepiej pasujący fieldmap `AP`
-- kolumna 3: najlepiej pasujący fieldmap `PA`
+- skrypt wyciąga z nazwy pliku `subject` i `session`,
+- przechodzi do odpowiadającego katalogu `fmap`,
+- porównuje skan z fieldmapami `AP` i `PA` bez etykiety `run`,
+- sprawdza `ImageOrientationPatientDICOM` i `ShimSetting`,
+- jeśli dopasowanie nie wygląda dobrze, wypisuje pełną ścieżkę skanu `func`.
 
-Jeśli dla `AP` albo `PA` nie ma pełnego dopasowania, odpowiednia kolumna zostaje pusta.
+Wyjście:
 
-## Jak uruchomić
+- lista ścieżek do skanów, które trafiają do `mismatch.txt`.
 
-Przykładowe wywołanie jest w [fieldmap_check.sh](/home/jovyan/PROJEKTY/fmaps/ses-01/fieldmap_check.sh:1).
+### `analysis_02_better_fmap_match.sh`
 
-Schemat działania jest taki:
+Wejście:
+
+- `mismatch.txt` z kroku 1.
+
+Logika:
+
+- skrypt czyta po jednej ścieżce `func` z `mismatch.txt`,
+- dla każdej ścieżki przechodzi do `sub-*/ses-*/fmap`,
+- przeszukuje wszystkie dostępne JSON-y `*_dir-AP*_epi.json` i `*_dir-PA*_epi.json`,
+- zapisuje najlepszy match dla `AP` i `PA`,
+- uznaje match tylko wtedy, gdy zgadzają się oba kryteria: orientacja i `ShimSetting`.
+
+Wyjście:
+
+- `better_match.tsv` z trzema kolumnami:
+  - ścieżka do skanu `func`,
+  - najlepiej pasujący fieldmap `AP`,
+  - najlepiej pasujący fieldmap `PA`.
+
+Jeśli dla jednej z osi nie ma pełnego dopasowania, odpowiednia kolumna pozostaje pusta.
+
+### `fieldmap_check.sh`
+
+To przykład, jak połączyć kroki 1, 2 i 3 dla jednej sesji:
 
 ```bash
 : > mismatch.txt
 for f in sub-*/ses-*/func/sub-*_ses-01_task-alicja1_bold.json; do
-    ./analysis_01_alicja_fmap_match.sh "$f" >> mismatch.txt
+  ./analysis_01_fmap_match.sh "$f" >> mismatch.txt
 done
 
-./analysis_02_better_fmap_match.sh
+./analysis_02_better_fmap_match.sh mismatch.txt
+
+for f in sub-*/ses-*/func/sub-*_ses-01_task-alicja1_bold.nii.gz; do
+  ./analysis_03_preflight_fieldmap_check.py \
+    --custom-string acq-std \
+    --shim \
+    --position \
+    "$f"
+done
 ```
 
-Po wykonaniu:
+## 2. Preflight przed `fmriprep`
 
-- `mismatch.txt` zawiera skany, dla których domyślny fieldmap bez etykiety run nie pasuje,
-- `better_match.tsv` zawiera propozycje lepszych dopasowań `AP` i `PA`.
+### `analysis_03_preflight_fieldmap_check.py`
+
+Wejście:
+
+- pojedynczy plik `func.nii.gz`.
+
+Logika:
+
+- skrypt przechodzi do `ses-*/fmap` położonego obok pliku `func`,
+- szuka dwóch plików JSON fieldmap:
+  - `*_dir-AP*_epi.json`
+  - `*_dir-PA*_epi.json`
+- sprawdza, czy `IntendedFor` istnieje, ma poprawny typ i zawiera bieżący run,
+- waliduje wpisy `IntendedFor` jako poprawne ścieżki BIDS,
+- opcjonalnie porównuje `ShimSetting`,
+- opcjonalnie porównuje `ImageOrientationPatientDICOM`.
+
+Parametry:
+
+- `--custom-string`
+  - fragment nazwy fieldmapy, np. `acq-std` albo `run-02`
+  - domyślnie: `acq-std`
+- `--shim`
+  - włącza sprawdzanie `ShimSetting`
+- `--position`
+  - włącza sprawdzanie `ImageOrientationPatientDICOM`
+
+Przykład:
+
+```bash
+python3 analysis_03_preflight_fieldmap_check.py \
+  --custom-string run-02 \
+  --shim \
+  --position \
+  /path/to/sub-005/ses-01/func/sub-005_ses-01_task-localizer_run-02_bold.nii.gz
+```
+
+Wynik:
+
+- `0` jeśli `AP`, `PA`, `IntendedFor` i opcjonalne metadane są zgodne,
+- `1` jeśli brakuje fieldmapy albo coś się nie zgadza.
+
+## 3. Budowa fieldmapy z wielu skanów
+
+### `topup-all.sh`
+
+Skrypt przygotowuje pole z wszystkich dostępnych skanów `fmap` dla danej sesji.
+
+Działanie:
+
+- znajduje wszystkie `AP` i `PA` z prefiksem `acq-std` oraz numerem `run`,
+- odrzuca obrazy o innym kształcie niż dominujący,
+- zapisuje sidecary `acq-mean_fieldmap.json` i `acq-mean_magnitude.json`,
+- ustawia `IntendedFor` na wszystkie skany `func/*_bold.nii.gz` z sesji,
+- uruchamia `topup` z `module load fsl/6.0.7.22`,
+- tworzy `acq-mean_fieldmap.nii.gz` oraz `acq-mean_magnitude.nii.gz`.
+
+Przykład wywołania:
+
+```bash
+./topup-all.sh sub-01 ses-01 /path/to/bids
+```
+
+Wynik trafia do:
+
+- `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_fieldmap.nii.gz`
+- `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_fieldmap.json`
+- `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_magnitude.nii.gz`
+- `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_magnitude.json`
