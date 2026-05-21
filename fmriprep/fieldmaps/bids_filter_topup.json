@@ -1,0 +1,12 @@
+{
+    "bold": {
+        "datatype": "func",
+        "suffix": "bold",
+        "task": "all"
+    },
+    "fmap": {
+        "datatype": "fmap",
+        "acquisition": "mean",
+        "suffix": ["fieldmap", "magnitude"]
+      }
+}

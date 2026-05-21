@@ -20,6 +20,8 @@ Skrypt [`fieldmap_check.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/fi
 - [`analysis_03_preflight_fieldmap_check.py`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/analysis_03_preflight_fieldmap_check.py) - przyjmuje pojedynczy plik `func.nii.gz`, znajduje siostrzany katalog `fmap`, sprawdza `IntendedFor`, a opcjonalnie także `ShimSetting` i orientację.
 - [`fieldmap_check.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/fieldmap_check.sh) - pokazuje kompletny przykład uruchomienia 1, 2 i 3 w jednej sesji.
 - [`topup-all.sh`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/topup-all.sh) - scala wszystkie dostępne skany `fmap`, uruchamia `topup` i przygotowuje pliki wyjściowe pod `fmriprep`.
+- [`fieldmap_json_check.py`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/fieldmap_json_check.py) - sprawdza, czy JSON z `acq-mean_fieldmap.json` po `topup-all.sh` ma poprawne `IntendedFor`.
+- [`bids_filter_topup.json`](/home/jovyan/lobi-mri-scripts/fmriprep/fieldmaps/bids_filter_topup.json) - filtr BIDS do uruchomienia `fmriprep` po `topup-all.sh`, tak aby używał wygenerowanej pary `acq-mean_fieldmap` i `acq-mean_magnitude`.
 
 ## Wspólny wzorzec wejścia
 
@@ -167,3 +169,47 @@ Wynik trafia do:
 - `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_fieldmap.json`
 - `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_magnitude.nii.gz`
 - `/path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_magnitude.json`
+
+## 4. Sprawdzenie wyniku `topup-all.sh`
+
+### `fieldmap_json_check.py`
+
+Skrypt jest szybkim walidatorem sidecara wygenerowanego przez `topup-all.sh`.
+
+Wejście:
+
+- jeden plik JSON, zwykle `*_acq-mean_fieldmap.json`.
+
+Logika:
+
+- czyta `IntendedFor`,
+- akceptuje `IntendedFor` jako string albo listę stringów,
+- sprawdza, czy wszystkie wpisy pasują do wzorca BIDS dla `func` albo `dwi`.
+
+Wynik:
+
+- `0` jeśli `IntendedFor` wygląda poprawnie,
+- `1` jeśli JSON jest pusty, uszkodzony albo ma złe ścieżki.
+
+Przykład:
+
+```bash
+python3 fieldmap_json_check.py \
+  /path/to/bids/sub-01/ses-01/fmap/sub-01_ses-01_acq-mean_fieldmap.json
+```
+
+### `bids_filter_topup.json`
+
+To filtr dla `fmriprep`, którego używasz po `topup-all.sh`.
+
+Zawiera:
+
+- wszystkie skany `bold` w `func`,
+- fieldmapy w `fmap` z `acquisition=mean` i suffixem `fieldmap` albo `magnitude`.
+
+Przykład użycia:
+
+```bash
+fmriprep /path/to/bids /path/to/derivatives participant \
+  --bids-filter-file bids_filter_topup.json
+```
