@@ -15,11 +15,51 @@
       }
     },
     {
-      "id": "fmri",
+      "id": "respum1",
       "datatype": "func",
       "suffix": "bold",
+      "custom_entities": "task-repsum1",
       "criteria": {
-        "SeriesDescription": "task-*"
+        "SeriesDescription": "task-repsum_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "repsum1"
+      }
+    },
+    {
+      "id": "respum2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-repsum2",
+      "criteria": {
+        "SeriesDescription": "task-repsum_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "repsum2"
+      }
+    },
+    {
+      "id": "localizer1",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-localizer1",
+      "criteria": {
+        "SeriesDescription": "task-localizer_run-01"
+      },
+      "sidecar_changes": {
+        "TaskName": "localizer1"
+      }
+    },
+    {
+      "id": "localizer2",
+      "datatype": "func",
+      "suffix": "bold",
+      "custom_entities": "task-localizer2",
+      "criteria": {
+        "SeriesDescription": "task-localizer_run-02"
+      },
+      "sidecar_changes": {
+        "TaskName": "localizer2"
       }
     },
     {
@@ -29,7 +69,7 @@
         "SeriesDescription": "SpinEchoFieldMap*"
       },
       "sidecar_changes": {
-        "intendedFor": ["fmri"]
+        "intendedFor": ["repsum1","repsum2","localizer1","localizer2"]
       }
     },
     {
@@ -53,7 +93,7 @@
         {
             "datatype": "fmap",
             "suffix": "epi",
-            "custom_entities": "dir-PA_acq-dwi",
+            "custom_entities": "acq-dwi_dir-PA",
             "criteria": {
                 "SeriesDescription": "ep2d_diff_biobank 3b0 PA"
             },
