@@ -15,7 +15,7 @@
       }
     },
     {
-      "id": "respum1",
+      "id": "repsum1",
       "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-repsum1",
@@ -27,7 +27,7 @@
       }
     },
     {
-      "id": "respum2",
+      "id": "repsum2",
       "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-repsum2",
@@ -65,8 +65,20 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
+      "custom_entities": "dir-AP",
       "criteria": {
-        "SeriesDescription": "SpinEchoFieldMap*"
+        "SeriesDescription": "SpinEchoFieldMap_AP"
+      },
+      "sidecar_changes": {
+        "intendedFor": ["repsum1","repsum2","localizer1","localizer2"]
+      }
+    },
+    {
+      "datatype": "fmap",
+      "suffix": "epi",
+      "custom_entities": "dir-PA",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_PA"
       },
       "sidecar_changes": {
         "intendedFor": ["repsum1","repsum2","localizer1","localizer2"]
