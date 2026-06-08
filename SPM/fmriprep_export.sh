@@ -30,13 +30,14 @@ for ses_dir in derivatives/fmriprep/"$sub"/ses-*; do
     if [[ -d "$ses_dir/fmap" ]]; then
         outsub="$sub"
     else
+        echo "  WARNING: no fieldmap folder found for $sub $ses"
         outsub="${sub}_uncorr"
     fi
 
     outdir="derivatives/spm/$outsub/$task"
     mkdir -p "$outdir"
 
-    echo "$sub $ses"
+    echo "$sub $ses -> $outdir"
 
     for f in \
         "$ses_dir"/func/*task-"$task"*space-MNI*desc-preproc_bold.nii.gz \
