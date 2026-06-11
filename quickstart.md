@@ -127,10 +127,10 @@ ls -1 ~/bids-dir
 
 Usually, we provide you with a customized configuration for `dcm2bids`. Ready-made configurations are available in the [`dcm2bids`](./dcm2bids) directory of this repository.
 
-The `~/lobi-mri-scripts` directory should stay a shared source repository. Do not edit files there. Keep your project-specific copies in `~/bids-dir/code`, and link or copy them from the repository when needed:
+The `~/lobi-mri-scripts` directory should stay a shared source repository. Do not edit files there. Keep your project-specific copies in `~/bids-dir/code`, and copy them from the repository when needed:
 
 ```bash
-ln -sf ~/lobi-mri-scripts/dcm2bids/mjris.json ~/bids-dir/code/config.json
+cp ~/lobi-mri-scripts/dcm2bids/mjris.json ~/bids-dir/code/config.json
 ```
 
 Below is an example configuration for a basic experiment consisting of T1w, task fMRI, and field maps:
@@ -208,14 +208,9 @@ lobi_scripts add run_mriqc.sh ~/bids-dir/code
 ~/bids-dir/code/run_mriqc.sh 03 ~/bids-dir ~/bids-dir/derivatives/mriqc
 ```
 
-**We recommend updating the repository frequently with `lobi_scripts update` and using the latest versions of the scripts and manuals.**
-
-Example commands:
+We recommend updating the repository frequently with `lobi_scripts update` and using the latest versions of the scripts and manuals. Use `lobi_scipts diff` to check what has beeen changed in the repository.
 
 ```bash
-lobi_scripts ls
-lobi_scripts add run_mriqc.sh ~/bids-dir/code
-lobi_scripts add run_fmriprep_min.sh ~/bids-dir/code
 lobi_scripts update
 lobi_scripts diff ~/bids-dir/code/run_mriqc.sh
 ```
