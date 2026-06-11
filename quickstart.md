@@ -37,7 +37,7 @@ Start by launching Neurodesktop and choosing one of the following:
 - **Jupyter Notebook**
 - **Remote Desktop (Neurodesktop GUI)**
 
-In the Neurodesktop GUI you can run MATLAB, FSL, Freeview, and other programs directly. See [Software and Pipelines](#3-software-and-pipelines) for details.
+In the Neurodesktop GUI you can run MATLAB, FSL, FreeSurfer, Freeview, and other programs directly. See [Software and Pipelines](#3-software-and-pipelines) for details.
 
 ## 2. Data Conversion
 

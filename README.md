@@ -2,7 +2,7 @@
 
 This repository contains custom `dcm2bids` configuration files for our projects and run scripts for common MRI processing tasks such as MRIQC, fMRIPrep, and FreeSurfer setup.
 
-For guidance on using the Neurodesk platform, see **[quickstart.md](./quickstart.md)** and **[FAQ.md](./FAQ.md)**. The quickstart notebook shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
+For guidance on using the Neurodesk platform, see **[quickstart.md](./quickstart.md)** and **[FAQ.md](./FAQ.md)**. The quickstart tutorial shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
 
 Specifically, this repository provides the following resources:
 
