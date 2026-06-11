@@ -127,7 +127,7 @@ ls -1 ~/bids-dir
 
 Usually, we provide you with a customized configuration for `dcm2bids`. Ready-made configurations are available in the [`dcm2bids`](./dcm2bids) directory of this repository.
 
-The `~/lobi-mri-scripts` directory should stay a shared source repository. Do not edit files there. Keep your project-specific copies in `~/bids-dir/code`, and copy them from the repository when needed:
+The `~/lobi-mri-scripts` directory should stay a shared source repository. Do not edit files there. Keep your project-specific copies in `~/bids-dir/code`, and copy them from the repository when needed. In practice, treat this repo as the source of reference files and make all local edits in your project directory:
 
 ```bash
 cp ~/lobi-mri-scripts/dcm2bids/mjris.json ~/bids-dir/code/config.json
@@ -208,7 +208,7 @@ lobi_scripts add run_mriqc.sh ~/bids-dir/code
 ~/bids-dir/code/run_mriqc.sh 03 ~/bids-dir ~/bids-dir/derivatives/mriqc
 ```
 
-We recommend updating the repository frequently with `lobi_scripts update` and using the latest versions of the scripts and manuals. Use `lobi_scipts diff` to check what has beeen changed in the repository.
+**It is recommended to update the repository frequently with `lobi_scripts update` and using the latest versions of the scripts and manuals. Use `lobi_scripts diff` to check what has been changed in the repository.**
 
 ```bash
 lobi_scripts update

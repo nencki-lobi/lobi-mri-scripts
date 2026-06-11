@@ -40,13 +40,22 @@ Custom configuration files for our projects:
   Please repair fieldmap JSONs using the following command:
   `find bids_root -iname "*dir*.json" -exec ./fmriprep/json_fmaps_repair.sh {} \;`
 
-**We recommend working with copies of the scripts in your projects.** Copy them into your project directory (`./code`), edit the local copies there, and run those local versions.
+***We recommend working with copies of the scripts in your projects.
 
-When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module, you can use the `lobi_scripts` shortcut to install, update, and copy the scripts:
+Typical workflow:
+
+1. Update repository using `git pull` or `lobi_scripts update` (see below)
+2. Copy a script into your project `./bids-dir/code` directory.
+3. Edit the local copy.
+4. Run the script from your project directory.
+
+When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module, you can use the `lobi_scripts` shortcuts:
 ```bash
 lobi_scripts install
 lobi_scripts update
+
 lobi_scripts ls
 lobi_scripts add run_mriqc.sh ~/bids-dir/code
+
 ~/bids-dir/code/run_mriqc.sh 03 ~/bids-dir ~/bids-dir/derivatives/mriqc
 ```
