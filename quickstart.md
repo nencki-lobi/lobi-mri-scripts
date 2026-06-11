@@ -1,5 +1,7 @@
 # Quickstart Tutorial: Neurodesktop & BIDS Conversion
 
+**Load this tutorial in preview mode by Right Click - Open With - Markdown Preview**
+
 Welcome! This tutorial will guide you through:
 
 - Launching Neurodesktop tools
@@ -265,18 +267,19 @@ cat ~/list.csv | parallel --colsep ',' --jobs 4 echo ~/bids-dir/code/run_fmripre
 
 #### Moving from fMRIPrep to SPM
 
-Moving from fMRIPrep to SPM is relatively straightforward. You only need to collect the necessary images and motion regressors.
+Moving from fMRIPrep to SPM is relatively straightforward. You only need to collect selected motion regressors, necessary images, and unzip the files into your working directory. You can do this manually or using the `fmriprep_export.sh` script from `./SPM/`.
 
 1. Collect preprocessed images from the fMRIPrep derivatives, for example `*desc-preproc_bold.nii.gz` files. You may need to unzip the files and add smoothing.
 2. Collect motion regressors from the fMRIPrep derivatives, for example `*desc-confounds_regressors.tsv` files. Convert them to TXT using our Bash script [extract-confounds-to-spm.sh](https://github.com/nencki-lobi/lobi-mri-scripts/blob/main/fmriprep/extract-confounds-to-spm.sh).
-3. Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the template images from [TemplateFlow](https://templateflow.org/download).
+3. Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the matching template images from [TemplateFlow](https://templateflow.org/download) (MNI152NLin2009cAsym by default).
 
 ### 3.3 Preinstalled Software
 
 Graphical tools do not work efficiently when launched via `module load` from the Neurodesk repository. Instead, follow these steps to run them locally:
 
 - **MATLAB**: run in Terminal with `./matlab`
-- **FSL**: configure it first with `source ~/shared_storage/fsl.sh`, then run `fsleyes`
+- **FSL**: configure it first with `source ~/shared_storage/fsl.sh` and restart the environment. The next time you start Neurodesk, FSL commands such as `fsleyes`, `bet`, and `fslmaths` will be available.
+- **FreeSurfer**: load it from the repository with `ml freesurfer` rather than a local installation. First run `source ~/shared_storage/freesurfer.sh` and restart the environment. This also sets up the license and helper shortcuts for data visualization: `fsbrainmask`, `fsaseg`, and `fswm`. Change into the subject's recon directory and type the shortcut name to open Freeview with a preset layout, for example `cd sub-01; fsbrainmask`.
 
 ### 3.4 Loading Software from the Neurodesk Repo
 

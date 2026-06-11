@@ -1,4 +1,4 @@
-#usage: ./fs_screens.sh sub-XX
+#usage: ./freeview_screenshot.sh sub-XX
 subj=$1
 # mri/aseg.mgz:colormap=lut:opacity=0.2
 freeview -v $subj/mri/brainmask.mgz \

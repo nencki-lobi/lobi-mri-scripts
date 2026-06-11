@@ -2,7 +2,7 @@
 
 This repository contains custom `dcm2bids` configuration files for our projects and run scripts for common MRI processing tasks such as MRIQC, fMRIPrep, and FreeSurfer setup.
 
-For guidance on using the Neurodesk platform, see **[quickstart.ipynb](./quickstart.ipynb)** and **[FAQ.md](./FAQ.md)**. The quickstart notebook shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
+For guidance on using the Neurodesk platform, see **[quickstart.md](./quickstart.md)** and **[FAQ.md](./FAQ.md)**. The quickstart notebook shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
 
 Specifically, this repository provides the following resources:
 
@@ -40,10 +40,13 @@ Custom configuration files for our projects:
   Please repair fieldmap JSONs using the following command:
   `find bids_root -iname "*dir*.json" -exec ./fmriprep/json_fmaps_repair.sh {} \;`
 
+**We recommend working with copies of the scripts in your projects.** Copy them into your project directory (`./code`), edit the local copies there, and run those local versions.
 
-
-When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module,
-you can call these scripts conveniently via the `lobi_script` command:
-`lobi_script run_mriqc.sh sub-xx ./derivatives/mriqc` or `lobi_script ls
-` to list scripts in the main directory.
-
+When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module, you can use the `lobi_scripts` shortcut to install, update, and copy the scripts:
+```bash
+lobi_scripts install
+lobi_scripts update
+lobi_scripts ls
+lobi_scripts add run_mriqc.sh ~/bids-dir/code
+~/bids-dir/code/run_mriqc.sh 03 ~/bids-dir ~/bids-dir/derivatives/mriqc
+```
