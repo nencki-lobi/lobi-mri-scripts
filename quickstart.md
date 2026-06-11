@@ -262,11 +262,13 @@ cat ~/list.csv | parallel --colsep ',' --jobs 4 echo ~/bids-dir/code/run_fmripre
 
 #### Moving from fMRIPrep to SPM
 
-Moving from fMRIPrep to SPM is relatively straightforward. You only need to collect selected motion regressors, necessary images, and unzip the files into your working directory. You can do this manually or using the `fmriprep_export.sh` script from `./SPM/`.
+Moving from fMRIPrep to SPM is relatively straightforward. You only need to collect selected motion regressors, necessary images, and unzip the files into your working directory. You can do this manually or using the [fmriprep_export.sh](https://github.com/nencki-lobi/lobi-mri-scripts/blob/main/SPM/fmriprep_export.sh).
 
-1. Collect preprocessed images from the fMRIPrep derivatives, for example `*desc-preproc_bold.nii.gz` files. You may need to unzip the files and add smoothing.
-2. Collect motion regressors from the fMRIPrep derivatives, for example `*desc-confounds_regressors.tsv` files. Convert them to TXT using our Bash script [extract-confounds-to-spm.sh](https://github.com/nencki-lobi/lobi-mri-scripts/blob/main/fmriprep/extract-confounds-to-spm.sh).
-3. Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the matching template images from [TemplateFlow](https://templateflow.org/download) (MNI152NLin2009cAsym by default).
+```bash
+code/fmriprep_export.sh sub-024 localizer
+```
+
+Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the matching template images from [TemplateFlow](https://templateflow.org/download) (MNI152NLin2009cAsym by default).
 
 ### 3.3 Preinstalled Software
 
@@ -278,19 +280,19 @@ Graphical tools do not work efficiently when launched via `module load` from the
 
 ### 3.4 Loading Software from the Neurodesk Repo
 
-Other programs, including graphical viewers such as Freeview and MRtrix, are not available locally and should be run in Terminal from Neurodesk via `module load XXX` or, more briefly, `ml XXX`, for example `ml ants`.
+Many software packages, including graphical viewers such as Freeview and MRtrix, are available through the
+Neurodesk repository. In Terminal, load them with `module load XXX` or, more briefly, `ml XXX`.
 
-In Jupyter, the syntax is:
+```bash
+ml ants
+antsRegistration
+```
 
+In Python Notebook use the following syntax:
 ```python
 import module
 await module.load("ants")
-```
-
-You can then run:
-
-```bash
-antsRegistration
+!antsRegistration
 ```
 
 ### 3.5 Installing New Software

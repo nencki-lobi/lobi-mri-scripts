@@ -40,7 +40,7 @@ Custom configuration files for our projects:
   Please repair fieldmap JSONs using the following command:
   `find bids_root -iname "*dir*.json" -exec ./fmriprep/json_fmaps_repair.sh {} \;`
 
-***We recommend working with copies of the scripts in your projects.
+### We recommend working with copies of the scripts in your projects.
 
 Typical workflow:
 
