@@ -274,9 +274,11 @@ Add conditions to your experimental design file and run the model. Remember that
 
 Graphical tools do not work efficiently when launched via `module load` from the Neurodesk repository. Instead, follow these steps to run them locally:
 
-- **MATLAB**: run in Terminal with `./matlab`
-- **FSL**: configure it first with `source ~/shared_storage/fsl.sh` and restart the environment. The next time you start Neurodesk, FSL commands such as `fsleyes`, `bet`, and `fslmaths` will be available.
-- **FreeSurfer**: load it from the repository with `ml freesurfer` rather than a local installation. First run `source ~/shared_storage/freesurfer.sh` and restart the environment. This also sets up the license and helper shortcuts for data visualization: `fsbrainmask`, `fsaseg`, and `fswm`. Change into the subject's recon directory and type the shortcut name to open Freeview with a preset layout, for example `cd sub-01; fsbrainmask`.
+- **MATLAB**: Configure your environment with `source ~/shared_storage/matlab.sh`. To use the MATLAB GUI, start a Neurodesktop session and launch MATLAB from a terminal by typing `matlab`.
+
+- **FSL**: Configure your environment with `source ~/shared_storage/fsl.sh` and restart your session to apply. FSL commands such as `fsleyes`, `bet`, and `fslmaths` will then be available in Neurodesk.
+
+- **FreeSurfer**: Configure your environment with `source ~/shared_storage/freesurfer.sh` and restart your session to apply. Unlike Matlab and FSL, FreeSurfer must be launched using the command `ml freesurfer` each time a new session is started. License and some helper commands for visualization have already been set up for You: `fsbrainmask`, `fsaseg`, and `fswm`. For example, change to a subject's recon directory and run the desired command eg. `cd sub-01 && fsbrainmask`.
 
 ### 3.4 Loading Software from the Neurodesk Repo
 
