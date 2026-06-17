@@ -268,7 +268,7 @@ Moving from fMRIPrep to SPM is relatively straightforward. You only need to coll
 code/fmriprep_export.sh sub-024 localizer
 ```
 
-Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the matching template images from [TemplateFlow](https://templateflow.org/download) (MNI152NLin2009cAsym by default).
+Add conditions to your experimental design file and run the model. Remember that SPM templates, although they are in MNI space, are not the same templates used by fMRIPrep. Download the matching template images from [TemplateFlow](https://templateflow.org/download) (MNI152NLin2009cAsym by default) and use appropriate atlas eg. [Harvard Oxford in NLin2009cAsym](https://github.com/nencki-lobi/spm-HOinNLin2009cAsym).
 
 ### 3.3 Preinstalled Software
 
