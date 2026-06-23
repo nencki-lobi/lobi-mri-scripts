@@ -72,7 +72,7 @@ The viewer will automatically load:
 
 ### Optional: Add Thumbnail Images
 
-You may add thumbnails using **either** symbolic links or PNG conversion. Run below commands inside `./mriqc/table_viewer/imgs`:
+You may add thumbnails using **either** symbolic links or PNG conversion for faster loading. Run below commands inside `./mriqc/table_viewer/imgs`:
 ```
 cd ./mriqc/table_viewer/imgs
 ```
@@ -91,7 +91,7 @@ for z in ../../sub-*/figures/*${desc}_${modality}.svg; do
 done
 ```
 
-#### **Option B: Convert SVG to PNG for faster loading**
+#### **Option B: Convert SVG to PNG (faster loading)**
 
 ```bash
 sudo apt install librsvg2-bin

@@ -1,4 +1,3 @@
-const imageExtension = 'svg';
 const linkPrefix = '..'; // images will be hyperlinked with this prefix and subject ID (default: ../)
 const autosaveKey = `table-viewer-ratings:${window.location.pathname}`;
 
@@ -100,7 +99,13 @@ fetch('data.csv')
             link.target = '_blank';
 	
             const img = document.createElement('img');
-            img.src = `imgs/${subjId}.${imageExtension}`; // Assuming images are named as subjId.jpg
+            //img.src = `imgs/${subjId}.${imageExtension}`;
+
+            img.src = `imgs/${subjId}.png`;
+            img.onerror = () => {
+                img.onerror = null; // wyłącz dalszą obsługę błędów
+                img.src = `imgs/${subjId}.svg`;
+            };
 
             link.appendChild(img);
             container.appendChild(link);
