@@ -1,69 +1,61 @@
-# XNAT sequence report
+## 🧠 LOBI Scripts for MRI Data Processing
 
-Skrypt `report.py` pobiera skany z projektu XNAT i zapisuje `report.csv`.
-W kolumnach CSV znajduja sie krotkie nazwy sekwencji z pliku `sequences.config`,
-a w komorkach liczba skanow dopasowanych dokladnie do pelnej nazwy sekwencji
-dla osoby.
+This repository contains custom `dcm2bids` configuration files for our projects and run scripts for common MRI processing tasks such as MRIQC, fMRIPrep, and FreeSurfer setup.
 
-## Instalacja
+For guidance on using the Neurodesk platform, see **[quickstart.md](./quickstart.md)** and **[FAQ.md](./FAQ.md)**. The quickstart tutorial shows how to use Neurodesk, the [xnat_dcm2bids module](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids), and the scripts provided in this repository, while the FAQ covers practical platform-related questions.
 
-Wymagany jest pakiet `pyxnat`:
+Specifically, this repository provides the following resources:
 
+
+### 📁 dcm2bids configs
+
+Custom configuration files for our projects:
+➡️ [`./dcm2bids`](./dcm2bids)
+
+
+### ⚙️ Available run scripts
+
+* **[`run_mriqc.sh subject bids_dir`](./run_mriqc.sh)**
+  Runs **MRIQC** with custom resource settings and working directory.
+  The framewise displacement (FD) threshold is set to `0.3` (adjust if needed).
+
+* **[`run_fmriprep_min.sh subject bids_dir`](./run_fmriprep_min.sh)**
+  Runs **fMRIPrep** with custom resource settings and working directory, **without** FreeSurfer reconstruction.
+
+* **[`run_fmriprep_kids_alicja.sh subject bids_dir`](./run_fmriprep_kids_alicja.sh)**
+  Fully customized **fMRIPrep** pipeline with:
+
+  * cohort-specific atlas from **TemplateFlow**,
+  * **BIDS filtering** to include only specific task names and selected fieldmaps **without the `run-xx` label** (note: fMRIPrep will not report missing fieldmaps but gives an error when there are multiple ones available).
+
+* **[`freesurfer/freesurfer_init.sh subjects_dir`](./freesurfer/freesurfer_init.sh)**
+  Initializes environment variables and Freeview aliases.
+
+* **[`run_dcm2bids_noauto.sh xnat_id subject [session]`](./run_dcm2bids_noauto.sh)**
+  ⚠️ **Deprecated:** this script has been replaced by the
+  [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module
+  with the flag `--auto_extract_entities False`.  
+  **Caution:** currently, [fMRIPrep does not recognize BIDS-URIs](https://github.com/nipreps/sdcflows/pull/349)
+  produced by `dcm2bids` and the `run_dcm2bids_noauto.sh` script.
+  Please repair fieldmap JSONs using the following command:
+  `find bids_root -iname "*dir*.json" -exec ./fmriprep/json_fmaps_repair.sh {} \;`
+
+### We recommend working with copies of the scripts in your projects.
+
+Typical workflow:
+
+1. Update repository using `git pull` or `lobi_scripts update` (see below)
+2. Copy a script into your project `./bids-dir/code` directory.
+3. Edit the local copy.
+4. Run the script from your project directory.
+
+When using the [xnat_dcm2bids](https://github.com/nencki-lobi/xnat_dcm2bids/tree/main/xnat_dcm2bids) module, you can use the `lobi_scripts` shortcuts:
 ```bash
-pip install pyxnat
-```
+lobi_scripts install
+lobi_scripts update
 
-## Konfiguracja dostepu do XNAT
+lobi_scripts ls
+lobi_scripts add run_mriqc.sh ~/bids-dir/code
 
-Skrypt uzywa natywnego logowania `pyxnat`, czyli `Interface()` czyta dane z
-pliku `~/.xnatPass`.
-
-Przykladowy `~/.xnatPass`:
-
-```text
-+username@https://xnat.nencki.edu.pl=password
-```
-
-Dla wlasnego konta podmien nazwe uzytkownika, adres serwera i haslo na swoje
-dane dostepowe, zachowujac format `+user@https://server=password`.
-
-## Konfiguracja sekwencji
-
-Plik `sequences.config` zawiera jedna sekwencje na linie w formacie:
-
-```text
-krotka_nazwa,pelna_nazwa_sekwencji
-```
-
-Pełna nazwa jest porownywana **dokładnie** z wartosciami XNAT `type` albo `series_description`.
-`krotka_nazwa` trafia do naglowka `report.csv`. Przecinek jest separatorem, wiec linia bez przecinka jest bledem konfiguracji.
-Skrypt usuwa tylko znak konca linii, wiec pozostale spacje sa czescia nazwy.
-
-Przyklad:
-
-```text
-fmap-ap,DistortionMap_PA
-fmap-pa,DistortionMap_AP
-bold,ep2d_bold_s8
-dwi,ep2d_diff_biobank
-dwi-b0,ep2d_diff_biobank 3b0 PA
-t1-mprage,t1_mprage_sag_p2_iso
-t1-vibe,t1_vibe_tra
-swi,t2_fl3d_tra_p2_swi
-t2-spc,t2_spc_da-fl_sag_p2_iso
-```
-
-## Uruchomienie
-
-Podaj nazwe projektu XNAT jako argument:
-
-```bash
-python report.py PC26a
-```
-
-Domyslnie skrypt czyta `sequences.config` i zapisuje `report.csv`.
-Mozna wskazac inne pliki:
-
-```bash
-python report.py PC26a --sequences my_sequences.config --output pc26a_report.csv
+~/bids-dir/code/run_mriqc.sh 03 ~/bids-dir ~/bids-dir/derivatives/mriqc
 ```
