@@ -1,0 +1,125 @@
+{
+    "descriptions": [
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "custom_entities": "acq-norm",
+            "criteria": {
+                "SeriesDescription": "t1_mprage_sag_p2_iso",
+                "ImageTypeText": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "SWI",
+            "custom_entities": "part-mag",
+            "criteria": {
+                "SeriesDescription": "t2_fl3d_tra_p2_swi",
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "NONE", "MAGNITUDE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "SWI",
+            "custom_entities": "part-phase",
+            "criteria": {
+                "SeriesDescription": "t2_fl3d_tra_p2_swi",
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "NONE", "PHASE"]
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "FLAIR",
+            "criteria": {
+                "SeriesDescription": "t2_spc_da-fl_sag_p2_iso"
+            }
+        },
+        {
+          "id": "rest",
+          "datatype": "func",
+          "custom_entities": "task-rest",
+          "suffix": "bold",
+          "criteria": {
+            "SeriesDescription": "ep2d_bold_s8"
+          },
+          "sidecar_changes": {
+            "TaskName": "rest"
+          }
+        },
+        {
+          "datatype": "fmap",
+          "suffix": "epi",
+          "criteria": {
+            "SeriesDescription": "DistortionMap_*"
+          },
+          "sidecar_changes": {
+            "intendedFor": ["rest"]
+          }
+        },
+        {
+            "id": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
+            "custom_entities": "dir-AP",
+            "criteria": {
+                "SeriesDescription": "ep2d_diff_biobank"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "custom_entities": "acq-dwi_dir-PA",
+            "criteria": {
+                "SeriesDescription": "ep2d_diff_biobank 3b0 PA"
+            },
+            "sidecar_changes": {
+                "intendedFor": ["dwi"]
+            }
+        },
+        {
+      "datatype": "fmap",
+      "suffix": "TB1TFL",
+      "custom_entities": "part-mag",
+      "criteria": {
+          "SeriesDescription": "rf_map",
+          "SequenceVariant": "SERVICE\\SP"
+          }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "VFA",
+            "custom_entities": "flip-2",
+            "criteria": {
+                "SeriesDescription": "t1_vibe_tra_fa*",
+                "FlipAngle": 2
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "VFA",
+            "custom_entities": "flip-10",
+            "criteria": {
+                "SeriesDescription": "t1_vibe_tra_fa*",
+                "FlipAngle": 10
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "VFA",
+            "custom_entities": "flip-20",
+            "criteria": {
+                "SeriesDescription": "t1_vibe_tra_fa*",
+                "FlipAngle": 20
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "custom_entities": "acq-dce",
+            "criteria": {
+                "SeriesDescription": "t1_vibe_tra",
+                "FlipAngle": 12
+            }
+        }
+    ]
+}
