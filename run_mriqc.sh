@@ -1,46 +1,52 @@
 #!/bin/bash
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <sub-XX> <bids_dir> <bids-dir/derivatives/mriqc>"
+set -u
+
+if (( $# != 3 )); then
+    echo "Usage: $0 <sub-XX> <bids_dir> <output_dir>"
     exit 1
 fi
 
 script_dir="$(dirname "${BASH_SOURCE[0]}")"
-#mriqc_ver=mriqc
-mriqc_ver=$script_dir/mriqc/mriqc-wrapper
+mriqc_ver="$script_dir/mriqc/mriqc-wrapper"
 
-if [ "$mriqc_ver" = "$script_dir/mriqc/mriqc-wrapper" ]; then
-	echo "CAUTION: using modified mriqc pipeline"
+if [[ "$mriqc_ver" == "$script_dir/mriqc/mriqc-wrapper" ]]; then
+    echo "CAUTION: using modified MRIQC pipeline"
 fi
+
 ml mriqc
 
-bids_dir=$(realpath "$2")
-output_dir=$(realpath "$3")
-subj=${1##*-}
-work=$(realpath ~/mriqc)
+subj="${1##*-}"
+output_dir="$(realpath "$3")"
 
-mkdir -p $work/$subj
 nthreads=10
-mem=20 #gb
+mem_gb=20
 
-echo $work
-$mriqc_ver \
-    $bids_dir \
-    $output_dir \
+mkdir -p "$HOME/mriqc/$subj"
+
+printf '%s Starting MRIQC analysis... Check %s/sub-%s.log for updates\n' \
+    "$(date '+%Y-%m-%d %H:%M:%S')" "$output_dir" "$subj"
+
+"$mriqc_ver" \
+    "$(realpath "$2")" \
+    "$output_dir" \
     participant \
-    --participant-label ${subj} \
+    --participant-label "$subj" \
     --fd_thres 0.5 \
-    --n_proc $nthreads \
-    --mem_gb $mem \
+    --n_proc "$nthreads" \
+    --mem_gb "$mem_gb" \
     --float32 \
-    --ants-nthreads $nthreads \
+    --ants-nthreads "$nthreads" \
     --verbose-reports \
     --no-sub \
-    -w $work/$subj \
-    --modalities T1w T2w bold
+    --modalities T1w T2w bold \
+    -w "$HOME/mriqc/$subj" \
+    > "$output_dir/sub-${subj}.log" 2>&1
 
-rm -rf $work/$subj
+rm -rf "$HOME/mriqc/$subj"
+
+printf '%s Finished MRIQC analysis. Check %s/sub-%s.log for details\n' \
+    "$(date '+%Y-%m-%d %H:%M:%S')" "$output_dir" "$subj"
 
 echo
-echo "Now You can run group level with:"
-echo "$mriqc_ver $bids_dir $output_dir group -w $work"
-
+echo "Now you can run group level with:"
+echo "\"$mriqc_ver\" \"$(realpath "$2")\" \"$output_dir\" group -w \"$HOME/mriqc\""

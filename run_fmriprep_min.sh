@@ -20,6 +20,7 @@ export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=$nprocs
 fmriprep $root_dir \
          $output_dir \
          participant \
+         --bids-filter-file ~/fmriprep/bids_filter.json \
          --fs-license-file ~/shared_storage/freesurfer.txt \
          --fs-no-reconall \
          --participant-label $subj \
