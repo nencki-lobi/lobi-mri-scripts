@@ -65,7 +65,7 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "custom_entities": "dir-AP",
+      "custom_entities": "acq-bold_dir-AP",
       "criteria": {
         "SeriesDescription": "SpinEchoFieldMap_AP"
       },
@@ -76,7 +76,7 @@
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "custom_entities": "dir-PA",
+      "custom_entities": "acq-bold_dir-PA",
       "criteria": {
         "SeriesDescription": "SpinEchoFieldMap_PA"
       },
