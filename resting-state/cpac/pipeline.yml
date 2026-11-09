@@ -15,11 +15,15 @@ pipeline_setup:
   pipeline_name: cpac_fmriprep-ingress
   output_directory:
 
+    # expecting *_desc-cleaned_bold.nii.gz and *_desc-denoisedNofilt_bold.nii.gz
+    write_func_outputs: On
+
     # Quality control outputs
     quality_control:
 
       # Generate quality control pages containing preprocessing and derivative outputs.
       generate_quality_control_images: On
+      generate_xcpqc_files: On
 
   outdir_ingress:
     run: On
@@ -103,7 +107,15 @@ nuisance_corrections:
       run: On
       Regressors:
         Name: default
-        Columns: [global_signal, white_matter]
+        Columns: ["trans_x", "trans_x_derivative1", "trans_x_power2", "trans_x_derivative1_power2",
+                "trans_y", "trans_y_derivative1", "trans_y_power2", "trans_y_derivative1_power2",
+                "trans_z", "trans_z_derivative1", "trans_z_power2", "trans_z_derivative1_power2",
+                "rot_x", "rot_x_derivative1", "rot_x_power2", "rot_x_derivative1_power2",
+                "rot_y", "rot_y_derivative1", "rot_y_power2", "rot_y_derivative1_power2",
+                "rot_z", "rot_z_derivative1", "rot_z_power2", "rot_z_derivative1_power2",
+                "csf", "csf_derivative1", "csf_power2", "csf_derivative1_power2",
+                "white_matter", "white_matter_derivative1",
+                "white_matter_power2", "white_matter_derivative1_power2"]
 
     # switch to Off if nuisance regression is off and you don't want to write out the regressors
     create_regressors: Off
@@ -139,6 +151,12 @@ regional_homogeneity:
 
   # space: Template or Native
   target_space: [Template]
+
+seed_based_correlation_analysis:
+  run: On
+  sca_roi_paths:
+    /home/jovyan/shared_storage/RESTING-STATE/cpac/amygdala_bilateral.nii.gz: Avg
+  norm_timeseries_for_DR: True
 
 network_centrality:
 
